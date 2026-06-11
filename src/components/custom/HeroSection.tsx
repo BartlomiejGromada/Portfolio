@@ -30,7 +30,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="w-full flex-1 flex items-center justify-center px-8 py-8 md:py-12 max-w-7xl mx-auto overflow-hidden">
+    <section className="w-full flex-1 flex items-center justify-center px-8 py-8 md:py-12 max-w-7xl mx-auto overflow-hidden min-h-[calc(100vh-100px)]">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center w-full">
         {/* Left Column - Content */}
         <motion.div
