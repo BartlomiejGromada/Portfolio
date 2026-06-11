@@ -65,7 +65,7 @@ export function SkillsSection() {
                       key={itemIndex}
                       className="px-3.5 py-1.5 bg-secondary/30 hover:bg-secondary/70 text-secondary-foreground text-sm font-medium rounded-lg transition-colors border border-border/50"
                     >
-                      {item}
+                      {item.name}
                     </span>
                   ))}
                 </div>

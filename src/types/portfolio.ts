@@ -15,7 +15,10 @@ export type PortfolioDataType = {
   detailedSkills: {
     category: LocalizedString;
     iconName: string;
-    items: string[];
+    items: {
+      name: string;
+      description: LocalizedString;
+    }[];
   }[];
   experience: {
     company: string;

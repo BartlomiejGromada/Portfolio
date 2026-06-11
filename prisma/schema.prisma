@@ -30,12 +30,17 @@ model Education {
   orderIndex  Int             @default(0)
 }
 
+type SkillItem {
+  name        String
+  description LocalizedString
+}
+
 model SkillCategory {
-  id         String          @id @default(auto()) @map("_id") @db.ObjectId
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
   category   LocalizedString
   iconName   String
-  items      String[]
-  orderIndex Int             @default(0)
+  items      SkillItem[]
+  orderIndex Int         @default(0)
 }
 
 model Profile {
