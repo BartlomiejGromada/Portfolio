@@ -11,9 +11,6 @@ export const translations = {
     hero: {
       availability: "Available for work",
       greeting: "Hi, I'm",
-      title: "Fullstack Developer",
-      description:
-        "I build modern web applications using .NET and React. I design reliable systems, intuitive interfaces, and solutions that combine high performance with excellent user experience.",
       viewProjects: "VIEW PROJECTS",
       resumeBtn: "RESUME",
     },
@@ -42,27 +39,33 @@ export const translations = {
       items: [
         {
           title: "Business-Oriented Solutions",
-          description: "I focus on solving business problems rather than simply implementing features.",
+          description:
+            "I focus on solving business problems rather than simply implementing features.",
         },
         {
           title: "Modular Architecture",
-          description: "I design applications with clear boundaries between modules to improve maintainability and future growth.",
+          description:
+            "I design applications with clear boundaries between modules to improve maintainability and future growth.",
         },
         {
           title: "Full Stack Perspective",
-          description: "I understand both backend and frontend development, allowing me to build complete solutions end-to-end.",
+          description:
+            "I understand both backend and frontend development, allowing me to build complete solutions end-to-end.",
         },
         {
           title: "Cloud Deployment",
-          description: "I use Azure and containerization technologies to deliver reliable and scalable applications.",
+          description:
+            "I use Azure and containerization technologies to deliver reliable and scalable applications.",
         },
         {
           title: "Quality Engineering",
-          description: "I prioritize clean code, consistency, and long-term maintainability.",
+          description:
+            "I prioritize clean code, consistency, and long-term maintainability.",
         },
         {
           title: "Continuous Learning",
-          description: "I actively explore software architecture, cloud technologies, and modern development practices.",
+          description:
+            "I actively explore software architecture, cloud technologies, and modern development practices.",
         },
       ],
     },
@@ -91,9 +94,6 @@ export const translations = {
     hero: {
       availability: "Dostępny do pracy",
       greeting: "Cześć, jestem",
-      title: "Fullstack Developer",
-      description:
-        "Buduję nowoczesne aplikacje internetowe z wykorzystaniem .NET i React. Projektuję niezawodne systemy, intuicyjne interfejsy oraz rozwiązania, które łączą wysoką wydajność z doskonałym doświadczeniem użytkownika.",
       viewProjects: "ZOBACZ PROJEKTY",
       resumeBtn: "CV",
     },
@@ -122,27 +122,33 @@ export const translations = {
       items: [
         {
           title: "Rozwiązania biznesowe",
-          description: "Skupiam się na rozwiązywaniu problemów biznesowych, a nie tylko na czystej implementacji funkcji.",
+          description:
+            "Skupiam się na rozwiązywaniu problemów biznesowych, a nie tylko na czystej implementacji funkcji.",
         },
         {
           title: "Modularna architektura",
-          description: "Projektuję aplikacje z wyraźnymi granicami między modułami, co ułatwia ich utrzymanie i dalszy rozwój.",
+          description:
+            "Projektuję aplikacje z wyraźnymi granicami między modułami, co ułatwia ich utrzymanie i dalszy rozwój.",
         },
         {
           title: "Perspektywa Full Stack",
-          description: "Zrozumienie zarówno backendu, jak i frontendu pozwala mi budować kompletne rozwiązania end-to-end.",
+          description:
+            "Zrozumienie zarówno backendu, jak i frontendu pozwala mi budować kompletne rozwiązania end-to-end.",
         },
         {
           title: "Wdrożenia w chmurze",
-          description: "Wykorzystuję platformę Azure oraz konteneryzację do dostarczania niezawodnych i skalowalnych aplikacji.",
+          description:
+            "Wykorzystuję platformę Azure oraz konteneryzację do dostarczania niezawodnych i skalowalnych aplikacji.",
         },
         {
           title: "Inżynieria jakości",
-          description: "Priorytetowo traktuję czysty kod, spójność i długoterminową jakość utrzymania systemu.",
+          description:
+            "Priorytetowo traktuję czysty kod, spójność i długoterminową jakość utrzymania systemu.",
         },
         {
           title: "Ciągła nauka",
-          description: "Aktywnie zgłębiam architekturę oprogramowania, technologie chmurowe oraz nowoczesne praktyki inżynieryjne.",
+          description:
+            "Aktywnie zgłębiam architekturę oprogramowania, technologie chmurowe oraz nowoczesne praktyki inżynieryjne.",
         },
       ],
     },

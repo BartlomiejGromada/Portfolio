@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { portfolioData } from "@/data/portfolio";
+import { usePortfolio } from "@/context/PortfolioContext";
 import { Zap } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export function Footer() {
   const { t } = useLanguage();
+  const portfolioData = usePortfolio();
+
   return (
     <footer className="w-full border-t border-border bg-background mt-auto">
       <div className="max-w-7xl mx-auto px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -39,7 +41,7 @@ export function Footer() {
           </Link>
 
           <Link
-            href={portfolioData.socialLinks.github}
+            href={portfolioData.sourceCodeUrl}
             target="_blank"
             className="hover:text-primary transition-colors"
           >

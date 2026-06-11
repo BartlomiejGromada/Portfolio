@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { portfolioData } from "@/data/portfolio";
+import { usePortfolio } from "@/context/PortfolioContext";
 import { motion } from "framer-motion";
 import { Server, AppWindow, Smartphone, Database, Cloud, Building2, Wrench } from "lucide-react";
 
@@ -16,7 +16,8 @@ const iconMap: Record<string, any> = {
 };
 
 export function SkillsSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const portfolioData = usePortfolio();
 
   return (
     <div className="w-full bg-secondary/10 border-y border-border/50">
@@ -54,7 +55,7 @@ export function SkillsSection() {
                     <IconComponent className="w-5 h-5" />
                   </div>
                   <h3 className="text-xl font-bold text-foreground tracking-tight">
-                    {category.category}
+                    {category.category[language as 'pl' | 'en']}
                   </h3>
                 </div>
                 

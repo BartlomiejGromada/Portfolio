@@ -1,12 +1,13 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { portfolioData } from "@/data/portfolio";
+import { usePortfolio } from "@/context/PortfolioContext";
 import { motion } from "framer-motion";
 import { GraduationCap, Calendar, MapPin } from "lucide-react";
 
 export function EducationSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const portfolioData = usePortfolio();
 
   return (
     <div className="w-full bg-secondary/10 border-y border-border/50">
@@ -38,19 +39,19 @@ export function EducationSection() {
               </div>
 
               <h3 className="text-2xl font-bold text-foreground tracking-tight mb-4">
-                {edu.degree}
+                {edu.degree[language as 'pl' | 'en']}
               </h3>
 
               <div className="flex-1">
                 <div className="flex items-start gap-3 text-muted-foreground mb-3">
                   <MapPin className="w-5 h-5 shrink-0 mt-0.5" />
-                  <span className="leading-snug">{edu.institution}</span>
+                  <span className="leading-snug">{edu.institution[language as 'pl' | 'en']}</span>
                 </div>
               </div>
 
               <div className="mt-6 pt-6 border-t border-border/50 flex items-center gap-3 text-sm font-mono text-muted-foreground font-semibold">
                 <Calendar className="w-4 h-4" />
-                {edu.period}
+                {edu.period[language as 'pl' | 'en']}
               </div>
             </motion.div>
           ))}

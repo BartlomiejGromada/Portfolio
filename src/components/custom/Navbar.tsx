@@ -4,12 +4,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { Zap, Menu, X } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icons";
-import { portfolioData } from "@/data/portfolio";
+import { usePortfolio } from "@/context/PortfolioContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { ThemeToggle } from "./ThemeToggle";
 
 export function Navbar() {
   const { t, language, setLanguage } = useLanguage();
+  const portfolioData = usePortfolio();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [

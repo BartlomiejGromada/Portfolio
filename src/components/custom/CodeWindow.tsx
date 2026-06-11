@@ -1,15 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import { portfolioData } from "@/data/portfolio";
+import { usePortfolio } from "@/context/PortfolioContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function CodeWindow() {
   const [activeTab, setActiveTab] = useState<"csharp" | "typescript">("csharp");
-  const { codeWindow } = portfolioData;
+  const portfolioData = usePortfolio();
+
+  const codeWindowData = {
+    csharp: {
+      className: "Developer",
+      properties: [
+        { type: "string", name: "Name", getter: "get;", value: `"${portfolioData.name}"` },
+      ],
+      methods: [{ signature: `public bool IsAvailable() => ` }],
+    },
+    typescript: {
+      interfaceName: "Developer",
+      properties: [{ name: "name", type: "string", value: `"${portfolioData.name}"` }],
+      methods: [
+        { name: "isAvailable", returnType: "boolean", body: "() => " },
+      ],
+    },
+  };
 
   const renderCSharp = () => {
-    const data = codeWindow.csharp;
+    const data = codeWindowData.csharp;
     return (
       <motion.div
         key="csharp"
@@ -47,14 +64,14 @@ export function CodeWindow() {
             ))}
             <div>{"};"}</div>
           </>
-        </div> <div className="pl-8 mt-4">
+        </div>
+        <div className="pl-8 mt-4">
           {data.methods.map((method, index) => {
-            const parts = method.signature.split("true");
             return (
               <div key={index}>
-                <span>{parts[0]}</span>
-                <span className="text-primary">true</span>
-                <span>{parts[1]}</span>
+                <span>{method.signature}</span>
+                <span className="text-primary">{portfolioData.availabilityStatus ? 'true' : 'false'}</span>
+                <span>;</span>
               </div>
             );
           })}
@@ -68,7 +85,7 @@ export function CodeWindow() {
   };
 
   const renderTypeScript = () => {
-    const data = codeWindow.typescript;
+    const data = codeWindowData.typescript;
     return (
       <motion.div
         key="typescript"
@@ -145,8 +162,8 @@ export function CodeWindow() {
           <div key={`vm-${index}`} className="pl-8 mt-2">
             <span className="text-foreground">{method.name}</span>
             <span className="text-foreground/60">: </span>
-            <span className="text-foreground/60">() =&gt; </span>
-            <span className="text-primary">true</span>
+            <span className="text-foreground/60">{method.body}</span>
+            <span className="text-primary">{portfolioData.availabilityStatus ? 'true' : 'false'}</span>
             <span className="text-foreground/60">,</span>
           </div>
         ))}

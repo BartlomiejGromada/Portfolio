@@ -17,17 +17,22 @@ const spaceMono = Space_Mono({
   subsets: ["latin"],
 });
 
+import { PortfolioProvider } from "@/context/PortfolioContext";
+import { getPortfolioData } from "@/lib/data";
+
 export const metadata: Metadata = {
   title: "Bartłomiej | Fullstack Developer",
   description:
     "Portfolio Fullstack Developera specjalizującego się w .NET i React.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const portfolioData = await getPortfolioData();
+
   return (
     <html lang="pl" suppressHydrationWarning>
       <body
@@ -38,9 +43,11 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <Navbar />
-          <main className="flex-1 flex flex-col">{children}</main>
-          <Footer />
+          <PortfolioProvider data={portfolioData}>
+            <Navbar />
+            <main className="flex-1 flex flex-col">{children}</main>
+            <Footer />
+          </PortfolioProvider>
         </Providers>
       </body>
     </html>

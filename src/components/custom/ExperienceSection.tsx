@@ -1,12 +1,13 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { portfolioData } from "@/data/portfolio";
+import { usePortfolio } from "@/context/PortfolioContext";
 import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
 
 export function ExperienceSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const portfolioData = usePortfolio();
 
   return (
     <div className="w-full bg-background">
@@ -41,7 +42,7 @@ export function ExperienceSection() {
               {/* Content */}
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-2 gap-2">
                 <h3 className="text-xl md:text-2xl font-bold text-foreground tracking-tight">
-                  {job.role}
+                  {job.role[language as 'pl' | 'en']}
                 </h3>
                 <span className="text-xs md:text-sm font-mono text-muted-foreground bg-secondary/30 px-3 py-1 rounded-full w-fit">
                   {job.date}
@@ -53,7 +54,7 @@ export function ExperienceSection() {
               </div>
 
               <p className="text-muted-foreground leading-relaxed mb-6">
-                {job.description}
+                {job.description[language as 'pl' | 'en']}
               </p>
 
               <div className="flex flex-wrap gap-2">

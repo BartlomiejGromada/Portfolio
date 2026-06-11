@@ -3,12 +3,13 @@
 import { motion, Variants } from "framer-motion";
 import { FileText } from "lucide-react";
 import Link from "next/link";
-import { portfolioData } from "@/data/portfolio";
+import { usePortfolio } from "@/context/PortfolioContext";
 import { CodeWindow } from "./CodeWindow";
 import { useLanguage } from "@/context/LanguageContext";
 
 export function HeroSection() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const portfolioData = usePortfolio();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -45,11 +46,11 @@ export function HeroSection() {
             className="flex items-center space-x-3 bg-secondary/30 px-4 py-2 rounded-full border border-border-ghost"
           >
             <div className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${portfolioData.availabilityStatus ? 'bg-primary' : 'bg-red-500'}`}></span>
+              <span className={`relative inline-flex rounded-full h-3 w-3 ${portfolioData.availabilityStatus ? 'bg-primary' : 'bg-red-500'}`}></span>
             </div>
             <span className="text-sm font-mono tracking-wider">
-              {t("hero.availability")}
+              {portfolioData.availabilityStatus ? t("hero.availability") : "Niedostępny"}
             </span>
           </motion.div>
 
@@ -58,7 +59,7 @@ export function HeroSection() {
             <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-tighter leading-[1.1]">
               {t("hero.greeting")}{" "}
               <span className="text-primary">{portfolioData.name}</span>,<br />
-              {t("hero.title")}
+              {portfolioData.title[language as "pl" | "en"]}
             </h1>
           </motion.div>
 
@@ -67,7 +68,7 @@ export function HeroSection() {
             variants={itemVariants}
             className="text-lg text-foreground/80 max-w-xl leading-relaxed"
           >
-            {t("hero.description")}
+            {portfolioData.description[language as "pl" | "en"]}
           </motion.p>
 
           {/* Actions */}
@@ -83,7 +84,7 @@ export function HeroSection() {
             </Link>
 
             <Link
-              href="/resume.pdf"
+              href={portfolioData.cvUrl[language as 'pl' | 'en']}
               target="_blank"
               className="group flex items-center justify-center space-x-2 bg-secondary/30 backdrop-blur-md border border-border-ghost text-foreground px-8 py-3.5 rounded-full font-semibold transition-all tracking-wider hover:bg-secondary/50 hover:-translate-y-0.5 hover:shadow-lg w-full sm:w-auto sm:min-w-[180px] text-sm md:text-base"
             >
