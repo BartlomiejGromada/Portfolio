@@ -33,12 +33,14 @@ model Education {
 type SkillItem {
   name        String
   description LocalizedString
+  subcategory LocalizedString?
 }
 
 model SkillCategory {
   id         String      @id @default(auto()) @map("_id") @db.ObjectId
   category   LocalizedString
   iconName   String
+  description LocalizedString?
   items      SkillItem[]
   orderIndex Int         @default(0)
 }

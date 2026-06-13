@@ -31,10 +31,15 @@ export async function getPortfolioData(): Promise<PortfolioDataType> {
     sourceCodeUrl: profile.sourceCodeUrl,
     cvUrl: profile.cvUrl,
     skills: profile.skillsSummary,
-    detailedSkills: skills.map((s) => ({
+    detailedSkills: skills.map((s: any) => ({
       category: s.category,
       iconName: s.iconName,
-      items: s.items,
+      description: s.description || undefined,
+      items: s.items.map((i: any) => ({
+        name: i.name,
+        description: i.description,
+        subcategory: i.subcategory || undefined,
+      })),
     })),
     experience: experience.map((e) => ({
       company: e.company,
