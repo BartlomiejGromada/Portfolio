@@ -1,5 +1,18 @@
 export type LocalizedString = { pl: string; en: string };
 
+export interface SkillItem {
+  name: string;
+  description: LocalizedString;
+  subcategory?: LocalizedString;
+}
+
+export interface SkillCategory {
+  category: LocalizedString;
+  iconName: string;
+  description?: LocalizedString;
+  items: SkillItem[];
+}
+
 export type PortfolioDataType = {
   name: string;
   title: LocalizedString;
@@ -12,11 +25,7 @@ export type PortfolioDataType = {
   sourceCodeUrl: string;
   cvUrl: LocalizedString;
   skills: string[];
-  detailedSkills: {
-    category: LocalizedString;
-    iconName: string;
-    items: string[];
-  }[];
+  detailedSkills: SkillCategory[];
   experience: {
     company: string;
     role: LocalizedString;
