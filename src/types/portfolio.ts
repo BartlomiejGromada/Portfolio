@@ -37,5 +37,17 @@ export type PortfolioDataType = {
     degree: LocalizedString;
     institution: LocalizedString;
     period: LocalizedString;
+    thesisTitle?: LocalizedString;
+    github?: string;
+    description?: LocalizedString;
+  }[];
+  certificates: {
+    title: LocalizedString;
+    organizer: LocalizedString;
+    date: LocalizedString;
+    description: LocalizedString;
+    certificateUrl?: LocalizedString;
+    supplementUrl?: LocalizedString;
+    highlight: boolean;
   }[];
 };
