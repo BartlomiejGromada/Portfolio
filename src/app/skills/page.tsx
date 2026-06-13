@@ -308,7 +308,7 @@ export default function SkillsPage() {
             className="flex flex-col gap-1.5 border-l border-border/50 pl-4 py-2"
           >
               <div className="text-xs uppercase tracking-wider font-bold text-foreground/50 mb-3 ml-2">
-                {language === 'pl' ? 'Kompetencje techniczne' : 'Technical Expertise'}
+                {language === 'pl' ? 'Przejdź do' : 'Jump to'}
               </div>
               {portfolioData.detailedSkills.map((category, idx) => {
                 const id = category.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');

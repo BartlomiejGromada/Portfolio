@@ -29,7 +29,7 @@ export type PortfolioDataType = {
   experience: {
     company: string;
     role: LocalizedString;
-    date: string;
+    date: LocalizedString;
     description: LocalizedString;
     technologies: string[];
   }[];

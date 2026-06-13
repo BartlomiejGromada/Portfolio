@@ -45,7 +45,7 @@ export function ExperienceSection() {
                   {job.role[language as 'pl' | 'en']}
                 </h3>
                 <span className="text-xs md:text-sm font-mono text-muted-foreground bg-secondary/30 px-3 py-1 rounded-full w-fit">
-                  {job.date}
+                  {job.date[language as 'pl' | 'en']}
                 </span>
               </div>
               
@@ -53,9 +53,11 @@ export function ExperienceSection() {
                 {job.company}
               </div>
 
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                {job.description[language as 'pl' | 'en']}
-              </p>
+              <ul className="text-muted-foreground leading-relaxed mb-6 space-y-2 list-disc list-inside">
+                {job.description[language as 'pl' | 'en'].split('\n').filter(p => p.trim() !== '').map((point, idx) => (
+                  <li key={idx} className="pl-2">{point}</li>
+                ))}
+              </ul>
 
               <div className="flex flex-wrap gap-2">
                 {job.technologies.map((tech, techIndex) => (
