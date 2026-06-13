@@ -18,7 +18,7 @@ export function Navbar() {
     { href: "/#about", label: t("nav.about") },
     { href: "/skills", label: t("nav.skills") },
     { href: "/education", label: t("nav.education") },
-    { href: "/#career", label: t("nav.career") },
+    { href: "/experience", label: t("nav.career") },
   ];
 
   return (

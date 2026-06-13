@@ -16,7 +16,7 @@ model Experience {
   id           String          @id @default(auto()) @map("_id") @db.ObjectId
   company      String
   role         LocalizedString
-  date         String
+  date         LocalizedString
   description  LocalizedString
   technologies String[]
   orderIndex   Int             @default(0)
