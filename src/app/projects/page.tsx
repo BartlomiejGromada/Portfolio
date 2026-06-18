@@ -25,7 +25,7 @@ export default function ProjectsPage() {
   const projectsData = portfolioData.projects;
 
   return (
-    <div className="min-h-screen bg-background pt-24 pb-16 px-8 relative overflow-hidden">
+    <div className="min-h-screen bg-background pt-24 pb-16 px-8 relative">
       {/* Decorative background */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-[128px] -z-10 pointer-events-none" />
       <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary/5 rounded-full blur-[128px] -z-10 pointer-events-none" />
