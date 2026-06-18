@@ -50,4 +50,13 @@ export type PortfolioDataType = {
     supplementUrl?: LocalizedString;
     highlight: boolean;
   }[];
+  projects: {
+    id: string;
+    title: LocalizedString;
+    description: LocalizedString;
+    technologies: string[];
+    githubUrl: string;
+    iconName: string;
+    featured: boolean;
+  }[];
 };

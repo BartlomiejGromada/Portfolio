@@ -72,3 +72,14 @@ model Profile {
   cvUrl              LocalizedString
   skillsSummary      String[]
 }
+
+model Project {
+  id           String          @id @default(auto()) @map("_id") @db.ObjectId
+  title        LocalizedString
+  description  LocalizedString
+  technologies String[]
+  githubUrl    String
+  iconName     String
+  featured     Boolean         @default(false)
+  orderIndex   Int             @default(0)
+}

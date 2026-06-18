@@ -13,6 +13,7 @@ export async function getPortfolioData(): Promise<PortfolioDataType> {
   const education = await prisma.education.findMany({ orderBy: { orderIndex: 'asc' } });
   const skills = await prisma.skillCategory.findMany({ orderBy: { orderIndex: 'asc' } });
   const certificates = await prisma.certificate.findMany({ orderBy: { orderIndex: 'asc' } });
+  const projects = await prisma.project.findMany({ orderBy: { orderIndex: 'asc' } });
 
   // If DB is empty, throw error
   if (!profile) {
@@ -65,6 +66,15 @@ export async function getPortfolioData(): Promise<PortfolioDataType> {
       certificateUrl: c.certificateUrl || undefined,
       supplementUrl: c.supplementUrl || undefined,
       highlight: c.highlight,
+    })),
+    projects: projects.map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      technologies: p.technologies,
+      githubUrl: p.githubUrl,
+      iconName: p.iconName,
+      featured: p.featured,
     }))
   };
 }
