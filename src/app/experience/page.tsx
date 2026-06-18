@@ -35,9 +35,9 @@ export default function ExperiencePage() {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[128px] -z-10 pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[128px] -z-10 pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto relative">
+      <div className="max-w-[90rem] mx-auto w-full flex-1 flex flex-col xl:flex-row gap-8 xl:gap-12 relative">
         {/* Lewa kolumna: Główna treść */}
-        <div className="w-full">
+        <div className="flex-1 w-full max-w-5xl mx-auto">
           {/* Widok domyślny (Ogólny) */}
           <AnimatePresence initial={false} mode="wait">
             {!activeSection && (
@@ -218,38 +218,40 @@ export default function ExperiencePage() {
         </div>
 
         {/* Prawa kolumna: Spis treści (Sidebar) - Desktop Only */}
-        <div className="hidden 2xl:block fixed top-32 left-[calc(50%+34rem)] w-56 z-30">
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-col gap-1.5 border-l border-border/50 pl-4 py-2"
-          >
-            <div className="text-xs uppercase tracking-wider font-bold text-foreground/50 mb-3 ml-2">
-              {isPl ? "Przejdź do" : "Jump to"}
-            </div>
-            {sections.map((section) => {
-              const isActive = activeSection === section.id;
-              return (
-                <button
-                  key={section.id}
-                  onClick={() => {
-                    setActiveSection((prev) =>
-                      prev === section.id ? "" : section.id,
-                    );
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                  className={`text-left px-3 py-2 text-sm font-medium rounded-lg transition-all ${
-                    isActive
-                      ? "bg-primary/10 text-primary font-bold shadow-sm"
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                  }`}
-                >
-                  {section.title[isPl ? "pl" : "en"]}
-                </button>
-              );
-            })}
-          </motion.div>
+        <div className="hidden xl:block w-56 shrink-0 relative">
+          <div className="sticky top-24 z-30 -mt-2">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col gap-1.5 border-l border-border/50 pl-4 pb-2"
+            >
+              <div className="text-xs uppercase tracking-wider font-bold text-foreground/50 mb-3 ml-2">
+                {isPl ? "Przejdź do" : "Jump to"}
+              </div>
+              {sections.map((section) => {
+                const isActive = activeSection === section.id;
+                return (
+                  <button
+                    key={section.id}
+                    onClick={() => {
+                      setActiveSection((prev) =>
+                        prev === section.id ? "" : section.id,
+                      );
+                      window.scrollTo({ top: 0, behavior: "smooth" });
+                    }}
+                    className={`text-left px-3 py-2 text-sm font-medium rounded-lg transition-all ${
+                      isActive
+                        ? "bg-primary/10 text-primary font-bold shadow-sm"
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                    }`}
+                  >
+                    {section.title[isPl ? "pl" : "en"]}
+                  </button>
+                );
+              })}
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>

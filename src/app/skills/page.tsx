@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Server, AppWindow, Smartphone, Database, Cloud, Building2, Wrench, ChevronUp, Bot, TestTubes, Users, Search } from "lucide-react";
+import { Server, AppWindow, Smartphone, Database, Cloud, Building2, Wrench, ChevronUp, Bot, TestTubes, Users, Search, ArrowLeft } from "lucide-react";
 import { SiDotnet, SiReact, SiTypescript } from "react-icons/si";
 import { TbBrandCSharp } from "react-icons/tb";
 import { VscAzure } from "react-icons/vsc";
@@ -128,10 +128,10 @@ export default function SkillsPage() {
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-16 px-8">
-      <div className="max-w-5xl mx-auto relative">
+      <div className="max-w-[90rem] mx-auto w-full flex-1 flex flex-col xl:flex-row gap-8 xl:gap-12 relative">
         
         {/* Lewa kolumna: Główna treść */}
-        <div className="w-full">
+        <div className="flex-1 w-full max-w-5xl mx-auto">
         {/* Nagłówek i Wyszukiwarka */}
         <div>
           <AnimatePresence initial={false} mode="wait">
@@ -164,20 +164,55 @@ export default function SkillsPage() {
                   </div>
 
                   {/* Wyszukiwarka na start */}
-                  {renderSearchBar("start-search", false)}
+                  <div className="mt-8">
+                    {renderSearchBar("start-search", false)}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+            
+            {activeSection && (
+              <motion.div 
+                key="compact-header"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4"
+              >
+                <button 
+                  onClick={() => setActiveSection("")}
+                  className="flex items-center text-sm font-semibold text-muted-foreground hover:text-primary transition-colors group w-fit"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+                  {language === 'pl' ? "Wróć do przeglądu" : "Back to overview"}
+                </button>
+                <div className="w-full md:w-64">
+                  {renderSearchBar("compact", true)}
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* Spis treści (Table of Contents) - Mobile/Tablet Only */}
+        {/* Spis treści (Mobile/Tablet Only) */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="2xl:hidden sticky top-[72px] z-40 mb-6 flex flex-wrap gap-3 bg-background/90 backdrop-blur-md py-4 border-b border-border/50 shadow-sm -mx-8 px-8 md:mx-0 md:px-0 md:border-b-0 md:shadow-none"
+          className="xl:hidden sticky top-[72px] z-40 mb-10 flex flex-wrap gap-2 bg-background/90 backdrop-blur-md py-4 border-b border-border/50 shadow-sm -mx-8 px-8 md:mx-0 md:px-0 md:border-b-0 md:shadow-none"
         >
+          <button
+            onClick={() => {
+              setActiveSection("");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className={`px-4 py-2 text-sm font-medium rounded-full transition-all border ${
+              activeSection === "" 
+                ? "bg-primary text-primary-foreground border-primary shadow-md" 
+                : "bg-secondary/20 hover:bg-primary/20 text-foreground border-border"
+            }`}
+          >
+            {language === 'pl' ? "Wszystkie" : "All"}
+          </button>
           {portfolioData.detailedSkills.map((category, idx) => {
             const id = category.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
             const isActive = activeSection === id;
@@ -185,12 +220,12 @@ export default function SkillsPage() {
               <button
                 key={idx}
                 onClick={() => {
-                  setActiveSection(prev => prev === id ? "" : id);
+                  setActiveSection(id);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-                className={`px-5 py-2.5 text-sm font-medium rounded-full transition-all flex items-center border ${
+                className={`px-4 py-2 text-sm font-medium rounded-full transition-all border ${
                   isActive 
-                    ? "bg-primary text-primary-foreground border-primary shadow-md scale-105" 
+                    ? "bg-primary text-primary-foreground border-primary shadow-md" 
                     : "bg-secondary/20 hover:bg-primary/20 text-foreground border-border hover:border-primary/50"
                 }`}
               >
@@ -203,12 +238,12 @@ export default function SkillsPage() {
         {/* Aktywna kategoria */}
         <div className={activeSection ? "space-y-16 min-h-[50vh]" : "space-y-16"}>
           <AnimatePresence mode="wait">
-            {portfolioData.detailedSkills.filter(c => c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-') === activeSection).map((category) => {
+            {portfolioData.detailedSkills.filter(c => !activeSection || c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-') === activeSection).map((category) => {
               const IconComponent = iconMap[category.iconName] || Server;
               
               return (
                 <motion.div 
-                  key={activeSection}
+                  key={category.category.en}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
@@ -300,37 +335,39 @@ export default function SkillsPage() {
         </div>
 
         {/* Prawa kolumna: Spis treści (Sidebar) - Desktop Only */}
-        <div className="hidden 2xl:block fixed top-32 left-[calc(50%+34rem)] w-56">
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-col gap-1.5 border-l border-border/50 pl-4 py-2"
-          >
-              <div className="text-xs uppercase tracking-wider font-bold text-foreground/50 mb-3 ml-2">
-                {language === 'pl' ? 'Przejdź do' : 'Jump to'}
-              </div>
-              {portfolioData.detailedSkills.map((category, idx) => {
-                const id = category.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-                const isActive = activeSection === id;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => {
-                      setActiveSection(prev => prev === id ? "" : id);
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                    className={`text-left px-3 py-2 text-sm font-medium rounded-lg transition-all ${
-                      isActive 
-                        ? "bg-primary/10 text-primary font-bold shadow-sm" 
-                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                    }`}
-                  >
-                    {category.category[language as 'pl' | 'en']}
-                  </button>
-                );
-              })}
-            </motion.div>
+        <div className="hidden xl:block w-56 shrink-0 relative">
+          <div className="sticky top-24 z-30 -mt-2">
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col gap-1.5 border-l border-border/50 pl-4 pb-2"
+            >
+                <div className="text-xs uppercase tracking-wider font-bold text-foreground/50 mb-3 ml-2">
+                  {language === 'pl' ? 'Przejdź do' : 'Jump to'}
+                </div>
+                {portfolioData.detailedSkills.map((category, idx) => {
+                  const id = category.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+                  const isActive = activeSection === id;
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setActiveSection(prev => prev === id ? "" : id);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className={`text-left px-3 py-2 text-sm font-medium rounded-lg transition-all ${
+                        isActive 
+                          ? "bg-primary/10 text-primary font-bold shadow-sm" 
+                          : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                      }`}
+                    >
+                      {category.category[language as 'pl' | 'en']}
+                    </button>
+                  );
+                })}
+              </motion.div>
+          </div>
         </div>
 
       </div>
