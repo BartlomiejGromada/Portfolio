@@ -147,7 +147,6 @@ export default function ProjectsPage() {
             </motion.div>
           ))}
         </div>
-      </div>
 
       {/* Prawa kolumna: Spis treści (Sidebar) - Desktop Only */}
       <div className="hidden xl:block w-56 shrink-0 relative">
@@ -184,6 +183,7 @@ export default function ProjectsPage() {
         </div>
       </div>
     </div>
+      </div>
     </div>
   );
 }
