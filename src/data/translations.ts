@@ -13,6 +13,7 @@ export const translations = {
       greeting: "Hi, I'm",
       viewProjects: "VIEW PROJECTS",
       resumeBtn: "RESUME",
+      contactBtn: "CONTACT",
     },
     code: {
       classDesc: "Developer",
@@ -96,6 +97,7 @@ export const translations = {
       greeting: "Cześć, jestem",
       viewProjects: "ZOBACZ PROJEKTY",
       resumeBtn: "CV",
+      contactBtn: "WYŚLIJ EMAIL",
     },
     code: {
       classDesc: "Developer",
