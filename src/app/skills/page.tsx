@@ -9,6 +9,7 @@ import { SiDotnet, SiReact, SiTypescript } from "react-icons/si";
 import { TbBrandCSharp } from "react-icons/tb";
 import { VscAzure } from "react-icons/vsc";
 import { DiMsqlServer, DiPostgresql } from "react-icons/di";
+import { TableOfContents } from "@/components/custom/TableOfContents";
 
 const iconMap: Record<string, any> = {
   Server,
@@ -128,7 +129,7 @@ export default function SkillsPage() {
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-16 px-8">
-      <div className="max-w-[90rem] mx-auto w-full flex-1 flex flex-col xl:flex-row gap-8 xl:gap-12 relative">
+      <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col xl:flex-row gap-8 relative">
         
         {/* Lewa kolumna: Główna treść */}
         <div className="flex-1 w-full max-w-5xl mx-auto">
@@ -194,46 +195,18 @@ export default function SkillsPage() {
         </div>
 
         {/* Spis treści (Mobile/Tablet Only) */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="xl:hidden sticky top-[72px] z-40 mb-10 flex flex-wrap gap-2 bg-background/90 backdrop-blur-md py-4 border-b border-border/50 shadow-sm -mx-8 px-8 md:mx-0 md:px-0 md:border-b-0 md:shadow-none"
-        >
-          <button
-            onClick={() => {
-              setActiveSection("");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            className={`px-4 py-2 text-sm font-medium rounded-full transition-all border ${
-              activeSection === "" 
-                ? "bg-primary text-primary-foreground border-primary shadow-md" 
-                : "bg-secondary/20 hover:bg-primary/20 text-foreground border-border"
-            }`}
-          >
-            {language === 'pl' ? "Wszystkie" : "All"}
-          </button>
-          {portfolioData.detailedSkills.map((category, idx) => {
-            const id = category.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-            const isActive = activeSection === id;
-            return (
-              <button
-                key={idx}
-                onClick={() => {
-                  setActiveSection(id);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-                className={`px-4 py-2 text-sm font-medium rounded-full transition-all border ${
-                  isActive 
-                    ? "bg-primary text-primary-foreground border-primary shadow-md" 
-                    : "bg-secondary/20 hover:bg-primary/20 text-foreground border-border hover:border-primary/50"
-                }`}
-              >
-                {category.category[language as 'pl' | 'en']}
-              </button>
-            );
-          })}
-        </motion.div>
+        <TableOfContents 
+          sections={portfolioData.detailedSkills.map(c => ({
+            id: c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+            title: c.category
+          }))}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          language={language as "pl" | "en"}
+          isMobile={true}
+          showOverview={true}
+          overviewText={{ pl: "Wszystkie", en: "All" }}
+        />
 
         {/* Aktywna kategoria */}
         <div className={activeSection ? "space-y-16 min-h-[50vh]" : "space-y-16"}>
@@ -335,40 +308,16 @@ export default function SkillsPage() {
         </div>
 
         {/* Prawa kolumna: Spis treści (Sidebar) - Desktop Only */}
-        <div className="hidden xl:block w-56 shrink-0 relative">
-          <div className="sticky top-24 z-30 -mt-5">
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="flex flex-col gap-1.5 border-l border-border/50 pl-4 pb-2"
-            >
-                <div className="text-xs uppercase tracking-wider font-bold text-foreground/50 mb-3 ml-2">
-                  {language === 'pl' ? 'Przejdź do' : 'Jump to'}
-                </div>
-                {portfolioData.detailedSkills.map((category, idx) => {
-                  const id = category.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-                  const isActive = activeSection === id;
-                  return (
-                    <button
-                      key={idx}
-                      onClick={() => {
-                        setActiveSection(prev => prev === id ? "" : id);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                      className={`text-left px-3 py-2 text-sm font-medium rounded-lg transition-all ${
-                        isActive 
-                          ? "bg-primary/10 text-primary font-bold shadow-sm" 
-                          : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                      }`}
-                    >
-                      {category.category[language as 'pl' | 'en']}
-                    </button>
-                  );
-                })}
-              </motion.div>
-          </div>
-        </div>
+        <TableOfContents 
+          sections={portfolioData.detailedSkills.map(c => ({
+            id: c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+            title: c.category
+          }))}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          language={language as "pl" | "en"}
+          isMobile={false}
+        />
 
       </div>
 

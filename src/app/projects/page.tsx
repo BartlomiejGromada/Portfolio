@@ -6,6 +6,7 @@ import { usePortfolio } from "@/context/PortfolioContext";
 import { motion } from "framer-motion";
 import { ExternalLink, Code2, Rocket, Layout, FolderGit2 } from "lucide-react";
 import Link from "next/link";
+import { TableOfContents } from "@/components/custom/TableOfContents";
 
 const iconMap: Record<string, React.ElementType> = {
   "Rocket": Rocket,
@@ -48,32 +49,13 @@ export default function ProjectsPage() {
         </motion.div>
 
         {/* Spis treści (Mobile/Tablet Only) */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="xl:hidden sticky top-[72px] z-40 mb-10 flex flex-wrap gap-3 bg-background/90 backdrop-blur-md py-4 border-b border-border/50 shadow-sm -mx-8 px-8 md:mx-0 md:px-0 md:border-b-0 md:shadow-none"
-        >
-          {projectsData.map((project) => {
-            const isActive = activeSection === project.id;
-            return (
-              <button
-                key={project.id}
-                onClick={() => {
-                  setActiveSection(prev => prev === project.id ? "" : project.id);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
-                className={`px-5 py-2.5 text-sm font-medium rounded-full transition-all flex items-center border ${
-                  isActive 
-                    ? "bg-primary text-primary-foreground border-primary shadow-md scale-105" 
-                    : "bg-secondary/20 hover:bg-primary/20 text-foreground border-border hover:border-primary/50"
-                }`}
-              >
-                {project.title[langKey]}
-              </button>
-            );
-          })}
-        </motion.div>
+        <TableOfContents 
+          sections={projectsData.map(p => ({ id: p.id, title: p.title }))}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          language={language as "pl" | "en"}
+          isMobile={true}
+        />
 
         <div className="grid grid-cols-1 gap-8">
           {projectsData.filter(p => !activeSection || p.id === activeSection).map((project, idx) => (
@@ -147,43 +129,17 @@ export default function ProjectsPage() {
             </motion.div>
           ))}
         </div>
+        </div>
 
       {/* Prawa kolumna: Spis treści (Sidebar) - Desktop Only */}
-      <div className="hidden xl:block w-56 shrink-0 relative">
-        <div className="sticky top-24 z-30 -mt-5">
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex flex-col gap-1.5 border-l border-border/50 pl-4 pb-2"
-          >
-            <div className="text-xs uppercase tracking-wider font-bold text-foreground/50 mb-3 ml-2">
-              {isPl ? 'Przejdź do' : 'Jump to'}
-            </div>
-            {projectsData.map((project) => {
-              const isActive = activeSection === project.id;
-              return (
-                <button
-                  key={project.id}
-                  onClick={() => {
-                    setActiveSection(prev => prev === project.id ? "" : project.id);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                  className={`text-left px-3 py-2 text-sm font-medium rounded-lg transition-all ${
-                    isActive 
-                      ? "bg-primary/10 text-primary font-bold shadow-sm" 
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                  }`}
-                >
-                  {project.title[langKey]}
-                </button>
-              );
-            })}
-          </motion.div>
-        </div>
-      </div>
+      <TableOfContents 
+        sections={projectsData.map(p => ({ id: p.id, title: p.title }))}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+        language={language as "pl" | "en"}
+        isMobile={false}
+      />
     </div>
-      </div>
-    </div>
-  );
+  </div>
+);
 }

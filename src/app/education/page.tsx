@@ -5,6 +5,7 @@ import { useLanguage } from "@/context/LanguageContext";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { GraduationCap, Award, Calendar, BookOpen, Sparkles, Building2, Zap, ExternalLink, FileText, Download } from "lucide-react";
+import { TableOfContents } from "@/components/custom/TableOfContents";
 import Link from "next/link";
 import { GithubIcon } from "@/components/custom/icons";
 
@@ -26,7 +27,7 @@ export default function EducationPage() {
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-16 px-8">
-      <div className="max-w-[90rem] mx-auto w-full flex-1 flex flex-col xl:flex-row gap-8 xl:gap-12 relative">
+      <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col xl:flex-row gap-8 relative">
         
         {/* Lewa kolumna: Główna treść */}
         <div className="flex-1 w-full max-w-5xl mx-auto">
@@ -82,37 +83,19 @@ export default function EducationPage() {
           </div>
 
           {/* Spis treści (Mobile/Tablet Only) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="xl:hidden sticky top-[72px] z-40 mb-6 flex flex-wrap gap-3 bg-background/90 backdrop-blur-md py-4 border-b border-border/50 shadow-sm -mx-8 px-8 md:mx-0 md:px-0 md:border-b-0 md:shadow-none"
-          >
-            {sections.map((section) => {
-              const isActive = activeSection === section.id;
-              return (
-                <button
-                  key={section.id}
-                  onClick={() => {
-                    setActiveSection(prev => prev === section.id ? "" : section.id);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                  className={`px-5 py-2.5 text-sm font-medium rounded-full transition-all flex items-center border ${
-                    isActive 
-                      ? "bg-primary text-primary-foreground border-primary shadow-md scale-105" 
-                      : "bg-secondary/20 hover:bg-primary/20 text-foreground border-border hover:border-primary/50"
-                  }`}
-                >
-                  {section.title[isPl ? 'pl' : 'en']}
-                </button>
-              );
-            })}
-          </motion.div>
+          <TableOfContents 
+            sections={sections}
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            language={language as "pl" | "en"}
+            isMobile={true}
+            showOverview={false}
+          />
 
           {/* Aktywna kategoria */}
           <div className="space-y-16">
             <AnimatePresence mode="wait">
-              {activeSection === 'academic' && (
+              {(activeSection === 'academic' || activeSection === '') && (
                 <motion.div 
                   key="academic"
                   initial={{ opacity: 0, y: 20 }}
@@ -203,7 +186,7 @@ export default function EducationPage() {
                 </motion.div>
               )}
 
-              {activeSection === 'certificates' && (
+              {(activeSection === 'certificates' || activeSection === '') && (
                 <motion.div 
                   key="certificates"
                   initial={{ opacity: 0, y: 20 }}
@@ -302,39 +285,13 @@ export default function EducationPage() {
         </div>
 
         {/* Prawa kolumna: Spis treści (Sidebar) - Desktop Only */}
-        <div className="hidden xl:block w-56 shrink-0 relative">
-          <div className="sticky top-24 z-30 -mt-5">
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="flex flex-col gap-1.5 border-l border-border/50 pl-4 pb-2"
-            >
-              <div className="text-xs uppercase tracking-wider font-bold text-foreground/50 mb-3 ml-2">
-                {isPl ? 'Przejdź do' : 'Jump to'}
-              </div>
-              {sections.map((section) => {
-                const isActive = activeSection === section.id;
-                return (
-                  <button
-                    key={section.id}
-                    onClick={() => {
-                      setActiveSection(prev => prev === section.id ? "" : section.id);
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }}
-                    className={`text-left px-3 py-2 text-sm font-medium rounded-lg transition-all ${
-                      isActive 
-                        ? "bg-primary/10 text-primary font-bold shadow-sm" 
-                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                    }`}
-                  >
-                    {section.title[isPl ? 'pl' : 'en']}
-                  </button>
-                );
-              })}
-            </motion.div>
-          </div>
-        </div>
+        <TableOfContents 
+          sections={sections}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          language={language as "pl" | "en"}
+          isMobile={false}
+        />
 
       </div>
     </div>
