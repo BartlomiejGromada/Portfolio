@@ -85,7 +85,7 @@ export default function SkillsPage() {
   };
 
   const renderSearchBar = (id: string, isCompact: boolean = false) => (
-    <motion.div layoutId="global-search" className={`relative z-30 ${isCompact ? "w-full" : "w-full max-w-md mt-8"}`}>
+    <div className={`relative z-30 ${isCompact ? "w-full" : "w-full max-w-md mt-8"}`}>
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
         <input
@@ -124,7 +124,7 @@ export default function SkillsPage() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 
   return (
