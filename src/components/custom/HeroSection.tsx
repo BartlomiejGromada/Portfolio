@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { FileText } from "lucide-react";
+import { FileText, Mail } from "lucide-react";
 import Link from "next/link";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { CodeWindow } from "./CodeWindow";
@@ -77,19 +77,20 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row items-center gap-4 pt-4"
           >
             <Link
-              href="#projects"
-              className="flex items-center justify-center bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-semibold hover:bg-primary/90 transition-all tracking-wider hover:-translate-y-0.5 w-full sm:w-auto sm:min-w-[180px] text-sm md:text-base"
+              href={portfolioData.cvUrl[language as 'pl' | 'en']}
+              target="_blank"
+              className="group flex items-center justify-center space-x-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-semibold transition-all tracking-wider hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg w-full sm:w-auto sm:min-w-[180px] text-sm md:text-base"
             >
-              <span>{t("hero.viewProjects")}</span>
+              <FileText className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <span>{t("hero.resumeBtn")}</span>
             </Link>
 
             <Link
-              href={portfolioData.cvUrl[language as 'pl' | 'en']}
-              target="_blank"
+              href="mailto:bartlomiejgromada97@gmail.com"
               className="group flex items-center justify-center space-x-2 bg-secondary/30 backdrop-blur-md border border-border-ghost text-foreground px-8 py-3.5 rounded-full font-semibold transition-all tracking-wider hover:bg-secondary/50 hover:-translate-y-0.5 hover:shadow-lg w-full sm:w-auto sm:min-w-[180px] text-sm md:text-base"
             >
-              <FileText className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              <span>{t("hero.resumeBtn")}</span>
+              <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
+              <span>{t("hero.contactBtn")}</span>
             </Link>
           </motion.div>
         </motion.div>
