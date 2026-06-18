@@ -151,7 +151,7 @@ export default function ProjectsPage() {
 
       {/* Prawa kolumna: Spis treści (Sidebar) - Desktop Only */}
       <div className="hidden xl:block w-56 shrink-0 relative">
-        <div className="sticky top-24 z-30 -mt-2">
+        <div className="sticky top-24 z-30 -mt-5">
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
