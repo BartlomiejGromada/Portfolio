@@ -109,7 +109,7 @@ export default function ExperiencePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="2xl:hidden sticky top-[72px] z-40 mb-6 flex flex-wrap gap-3 bg-background/90 backdrop-blur-md py-4 border-b border-border/50 shadow-sm -mx-8 px-8 md:mx-0 md:px-0 md:border-b-0 md:shadow-none"
+            className="xl:hidden sticky top-[72px] z-40 mb-6 flex flex-wrap gap-3 bg-background/90 backdrop-blur-md py-4 border-b border-border/50 shadow-sm -mx-8 px-8 md:mx-0 md:px-0 md:border-b-0 md:shadow-none"
           >
             {sections.map((section) => {
               const isActive = activeSection === section.id;

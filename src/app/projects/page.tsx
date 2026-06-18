@@ -32,7 +32,7 @@ export default function ProjectsPage() {
       <div className="max-w-[90rem] mx-auto w-full flex-1 flex flex-col xl:flex-row gap-8 xl:gap-12 relative">
         <div className="flex-1 w-full max-w-5xl mx-auto">
         <motion.div 
-          className="mb-16"
+          className="mb-16 pt-2"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -52,7 +52,7 @@ export default function ProjectsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="2xl:hidden sticky top-[72px] z-40 mb-10 flex flex-wrap gap-3 bg-background/90 backdrop-blur-md py-4 border-b border-border/50 shadow-sm -mx-8 px-8 md:mx-0 md:px-0 md:border-b-0 md:shadow-none"
+          className="xl:hidden sticky top-[72px] z-40 mb-10 flex flex-wrap gap-3 bg-background/90 backdrop-blur-md py-4 border-b border-border/50 shadow-sm -mx-8 px-8 md:mx-0 md:px-0 md:border-b-0 md:shadow-none"
         >
           {projectsData.map((project) => {
             const isActive = activeSection === project.id;
