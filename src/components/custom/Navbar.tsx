@@ -15,10 +15,10 @@ export function Navbar() {
 
   const navLinks = [
     { href: "/", label: t("nav.home") },
-    { href: "#about", label: t("nav.about") },
-    { href: "#skills", label: t("nav.skills") },
-    { href: "#education", label: t("nav.education") },
-    { href: "#career", label: t("nav.career") },
+    { href: "/projects", label: t("nav.projects") },
+    { href: "/skills", label: t("nav.skills") },
+    { href: "/education", label: t("nav.education") },
+    { href: "/experience", label: t("nav.career") },
   ];
 
   return (

@@ -5,6 +5,7 @@ import { SkillsSection } from "@/components/custom/SkillsSection";
 import { ExperienceSection } from "@/components/custom/ExperienceSection";
 import { EducationSection } from "@/components/custom/EducationSection";
 import { ContactSection } from "@/components/custom/ContactSection";
+import { ScrollToTopButton } from "@/components/custom/ScrollToTopButton";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <ExperienceSection />
       <EducationSection />
       <ContactSection />
+      <ScrollToTopButton />
     </>
   );
 }

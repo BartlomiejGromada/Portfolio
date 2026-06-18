@@ -16,26 +16,48 @@ model Experience {
   id           String          @id @default(auto()) @map("_id") @db.ObjectId
   company      String
   role         LocalizedString
-  date         String
+  date         LocalizedString
   description  LocalizedString
   technologies String[]
   orderIndex   Int             @default(0)
 }
 
 model Education {
-  id          String          @id @default(auto()) @map("_id") @db.ObjectId
-  degree      LocalizedString
-  institution LocalizedString
-  period      LocalizedString
-  orderIndex  Int             @default(0)
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  degree        LocalizedString
+  institution   LocalizedString
+  period        LocalizedString
+  thesisTitle   LocalizedString?
+  github        String?
+  description   LocalizedString?
+  orderIndex    Int             @default(0)
+}
+
+model Certificate {
+  id             String          @id @default(auto()) @map("_id") @db.ObjectId
+  title          LocalizedString
+  organizer      LocalizedString
+  date           LocalizedString
+  description    LocalizedString
+  certificateUrl LocalizedString?
+  supplementUrl  LocalizedString?
+  highlight      Boolean         @default(false)
+  orderIndex     Int             @default(0)
+}
+
+type SkillItem {
+  name        String
+  description LocalizedString
+  subcategory LocalizedString?
 }
 
 model SkillCategory {
-  id         String          @id @default(auto()) @map("_id") @db.ObjectId
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
   category   LocalizedString
   iconName   String
-  items      String[]
-  orderIndex Int             @default(0)
+  description LocalizedString?
+  items      SkillItem[]
+  orderIndex Int         @default(0)
 }
 
 model Profile {
@@ -49,4 +71,15 @@ model Profile {
   sourceCodeUrl      String
   cvUrl              LocalizedString
   skillsSummary      String[]
+}
+
+model Project {
+  id           String          @id @default(auto()) @map("_id") @db.ObjectId
+  title        LocalizedString
+  description  LocalizedString
+  technologies String[]
+  githubUrl    String
+  iconName     String
+  featured     Boolean         @default(false)
+  orderIndex   Int             @default(0)
 }

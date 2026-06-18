@@ -12,6 +12,8 @@ export async function getPortfolioData(): Promise<PortfolioDataType> {
   const experience = await prisma.experience.findMany({ orderBy: { orderIndex: 'asc' } });
   const education = await prisma.education.findMany({ orderBy: { orderIndex: 'asc' } });
   const skills = await prisma.skillCategory.findMany({ orderBy: { orderIndex: 'asc' } });
+  const certificates = await prisma.certificate.findMany({ orderBy: { orderIndex: 'asc' } });
+  const projects = await prisma.project.findMany({ orderBy: { orderIndex: 'asc' } });
 
   // If DB is empty, throw error
   if (!profile) {
@@ -31,10 +33,15 @@ export async function getPortfolioData(): Promise<PortfolioDataType> {
     sourceCodeUrl: profile.sourceCodeUrl,
     cvUrl: profile.cvUrl,
     skills: profile.skillsSummary,
-    detailedSkills: skills.map((s) => ({
+    detailedSkills: skills.map((s: any) => ({
       category: s.category,
       iconName: s.iconName,
-      items: s.items,
+      description: s.description || undefined,
+      items: s.items.map((i: any) => ({
+        name: i.name,
+        description: i.description,
+        subcategory: i.subcategory || undefined,
+      })),
     })),
     experience: experience.map((e) => ({
       company: e.company,
@@ -47,6 +54,27 @@ export async function getPortfolioData(): Promise<PortfolioDataType> {
       degree: e.degree,
       institution: e.institution,
       period: e.period,
+      thesisTitle: e.thesisTitle || undefined,
+      github: e.github || undefined,
+      description: e.description || undefined,
     })),
+    certificates: certificates.map((c) => ({
+      title: c.title,
+      organizer: c.organizer,
+      date: c.date,
+      description: c.description,
+      certificateUrl: c.certificateUrl || undefined,
+      supplementUrl: c.supplementUrl || undefined,
+      highlight: c.highlight,
+    })),
+    projects: projects.map((p) => ({
+      id: p.id,
+      title: p.title,
+      description: p.description,
+      technologies: p.technologies,
+      githubUrl: p.githubUrl,
+      iconName: p.iconName,
+      featured: p.featured,
+    }))
   };
 }
