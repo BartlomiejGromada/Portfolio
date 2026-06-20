@@ -4,10 +4,17 @@ import Link from "next/link";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { Zap } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useState, useEffect } from "react";
 
 export function Footer() {
   const { t } = useLanguage();
   const portfolioData = usePortfolio();
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
 
   return (
     <footer className="w-full border-t border-border bg-background mt-auto">
@@ -51,7 +58,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="text-sm text-foreground/60">
-          © {new Date().getFullYear()}, Bartłomiej Gromada
+          © {year || "2026"}, Bartłomiej Gromada
         </div>
       </div>
     </footer>
