@@ -10,7 +10,8 @@ export const translations = {
     },
     hero: {
       availability: "Available for work",
-      greeting: "Hi, I'm",
+      greeting: "Hi,",
+      am: "I'm",
       viewProjects: "VIEW PROJECTS",
       resumeBtn: "RESUME",
       contactBtn: "CONTACT",
@@ -94,7 +95,8 @@ export const translations = {
     },
     hero: {
       availability: "Dostępny do pracy",
-      greeting: "Cześć, jestem",
+      greeting: "Cześć,",
+      am: "jestem",
       viewProjects: "ZOBACZ PROJEKTY",
       resumeBtn: "CV",
       contactBtn: "WYŚLIJ EMAIL",

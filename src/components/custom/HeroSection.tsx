@@ -59,8 +59,8 @@ export function HeroSection() {
           {/* Heading */}
           <motion.div variants={itemVariants} className="space-y-2">
             <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-bold tracking-tighter leading-[1.1]">
-              {t("hero.greeting")}{" "}
-              <span className="text-primary">{portfolioData.name}</span>,<br />
+              {t("hero.greeting")}<br />
+              <span className="whitespace-nowrap">{t("hero.am")} <span className="text-primary">{portfolioData.name}</span>,</span><br />
               {portfolioData.title[language as "pl" | "en"]}
             </h1>
           </motion.div>
