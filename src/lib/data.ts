@@ -1,7 +1,11 @@
 import prisma from './prisma';
 import { PortfolioDataType } from '@/types/portfolio';
+import { cacheLife } from 'next/cache';
 
 export async function getPortfolioData(): Promise<PortfolioDataType> {
+  'use cache';
+  cacheLife('database');
+
   // If no DATABASE_URL is provided, throw error
   if (!process.env.DATABASE_URL) {
     throw new Error("DATABASE_URL is not set.");
