@@ -36,7 +36,7 @@ export function ContactSection() {
           {/* Wyraźny adres e-mail */}
           <a
             href={`mailto:${emailAddress}`}
-            className="text-2xl md:text-4xl font-mono text-primary hover:text-primary/80 transition-colors mb-12 underline decoration-primary/30 underline-offset-8"
+            className="text-base sm:text-xl md:text-3xl lg:text-4xl font-mono text-primary hover:text-primary/80 transition-colors mb-12 underline decoration-primary/30 underline-offset-8 break-all sm:break-normal"
           >
             {emailAddress}
           </a>
