@@ -2,57 +2,69 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
-import { Server, Layout, ShieldCheck } from "lucide-react";
+import { Server, ShieldCheck, Database, Cpu } from "lucide-react";
 
 export function ServicesSection() {
   const { language } = useLanguage();
-  const isPl = language === 'pl';
+  const isPl = language === "pl";
 
   const services = [
     {
       id: "backend",
       icon: Server,
       title: {
-        pl: "Projektowanie Backendowe",
-        en: "Backend Engineering",
+        pl: "Projektowanie stabilnego backendu i API",
+        en: "Stable Backend & API Design",
       },
       description: {
-        pl: "Tworzę bezpieczne i testowalne API. Specjalizuję się w architekturze monolitów modułowych oraz optymalizacji baz danych.",
-        en: "I create secure and testable APIs. I specialize in modular monolith architecture and database optimization.",
-      }
-    },
-    {
-      id: "frontend",
-      icon: Layout,
-      title: {
-        pl: "Nowoczesny Frontend",
-        en: "Modern Frontend",
+        pl: "Tworzę czyste, bezpieczne i wydajne REST API w .NET, dbając o standardy i przejrzystą dokumentację.",
+        en: "I create clean, secure, and efficient REST APIs in .NET, ensuring standards and clear documentation.",
       },
-      description: {
-        pl: "Buduję szybkie, zoptymalizowane pod kątem SEO i wydajności aplikacje w React/Next.js, dbając o intuicyjne UX i estetyczny design.",
-        en: "I build fast, SEO and performance-optimized applications in React/Next.js, ensuring intuitive UX and aesthetic design.",
-      }
     },
     {
-      id: "practices",
+      id: "architecture",
       icon: ShieldCheck,
       title: {
-        pl: "Dbam o architekturę i jakość",
-        en: "Architecture & Quality",
+        pl: "Architektura i jakość kodu",
+        en: "Architecture & Code Quality",
       },
       description: {
-        pl: "Wykorzystuję zaawansowane wzorce projektowe (DDD, CQRS). Piszę czysty, łatwy w utrzymaniu kod zgodny z zasadami SOLID.",
-        en: "I use advanced design patterns (DDD, CQRS). I write clean, maintainable code following SOLID principles.",
-      }
-    }
+        pl: "Implementuję wzorce Clean Architecture, CQRS i Domain-Driven Design (DDD). Piszę kod, który łatwo się testuje i rozwija w zespole.",
+        en: "I implement Clean Architecture, CQRS, and Domain-Driven Design (DDD) patterns. I write code that is easy to test and develop in a team.",
+      },
+    },
+    {
+      id: "database",
+      icon: Database,
+      title: {
+        pl: "Optymalizacja baz danych",
+        en: "Database Optimization",
+      },
+      description: {
+        pl: "Projektuję struktury relacyjne i nierelacyjne. Znam triki optymalizacyjne, potrafię okiełznać wolne zapytania SQL, dobrać odpowiednie indeksy i wdrożyć caching.",
+        en: "I design relational and non-relational structures. I know optimization tricks, can tame slow SQL queries, choose appropriate indexes, and implement caching.",
+      },
+    },
+    {
+      id: "ai",
+      icon: Cpu,
+      title: {
+        pl: "Automatyzacja AI-assisted Development",
+        en: "AI-Assisted Development",
+      },
+      description: {
+        pl: "Nie rezygnuję z tradycyjnego rzemiosła, ale podkręcam swoje tempo pracy. Wykorzystuję zaawansowany Prompt Engineering i agentów AI do automatyzacji powtarzalnych zadań, szybkiego prototypowania i testowania.",
+        en: "I don't give up on traditional craftsmanship, but I boost my work pace. I use advanced Prompt Engineering and AI agents to automate repetitive tasks, rapid prototyping, and testing.",
+      },
+    },
   ];
 
   return (
     <section className="w-full py-24 px-8 max-w-7xl mx-auto relative overflow-hidden">
       {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-125 bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10" />
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
@@ -62,13 +74,13 @@ export function ServicesSection() {
           {isPl ? "W czym mogę pomóc?" : "How Can I Help?"}
         </h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-          {isPl 
-            ? "Rozumiem, że programowanie to nie tylko kod. To dostarczanie wartościowych i przemyślanych rozwiązań." 
+          {isPl
+            ? "Rozumiem, że programowanie to nie tylko kod. To dostarczanie wartościowych i przemyślanych rozwiązań."
             : "I understand that programming is more than just code. It's about delivering valuable and well-thought-out solutions."}
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {services.map((service, idx) => (
           <motion.div
             key={service.id}
@@ -86,11 +98,11 @@ export function ServicesSection() {
             </div>
 
             <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors">
-              {service.title[isPl ? 'pl' : 'en']}
+              {service.title[isPl ? "pl" : "en"]}
             </h3>
 
             <p className="text-muted-foreground leading-relaxed flex-1">
-              {service.description[isPl ? 'pl' : 'en']}
+              {service.description[isPl ? "pl" : "en"]}
             </p>
           </motion.div>
         ))}

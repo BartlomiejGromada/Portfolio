@@ -30,6 +30,7 @@ export async function getPortfolioData(): Promise<PortfolioDataType> {
       github: profile.githubUrl,
       linkedin: profile.linkedinUrl,
     },
+    email: profile.email,
     sourceCodeUrl: profile.sourceCodeUrl,
     cvUrl: profile.cvUrl,
     skills: profile.skillsSummary,

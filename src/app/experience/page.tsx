@@ -11,7 +11,6 @@ export default function ExperiencePage() {
   const { language } = useLanguage();
   const portfolioData = usePortfolio();
 
-  // Stan aktywny, tak samo jak na stronach Edukacja/Umiejętności (domyślnie pusty = widok ogólny)
   const [activeSection, setActiveSection] = useState("");
 
   const isPl = language === "pl";
@@ -19,7 +18,6 @@ export default function ExperiencePage() {
 
   const experienceData = portfolioData.experience;
 
-  // Generowanie sekcji spisu treści z nazw firm
   const sections = experienceData.map((exp) => ({
     id: exp.company.split(" – ")[0].toLowerCase().replace(/\s+/g, "-"),
     title: {
@@ -33,8 +31,10 @@ export default function ExperiencePage() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-16 px-8 relative">
       {/* Dekoracyjne tło */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[128px] -z-10 pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[128px] -z-10 pointer-events-none" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[128px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[128px]" />
+      </div>
 
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col xl:flex-row gap-8 relative">
         {/* Lewa kolumna: Główna treść */}
@@ -49,7 +49,7 @@ export default function ExperiencePage() {
                 exit={{ opacity: 0, height: 0, overflow: "hidden" }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
               >
-                <div className="pb-16 pt-2">
+                <div className="pb-24 md:pb-32 pt-2">
                   <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
                     {isPl
                       ? "Doświadczenie Zawodowe"
@@ -57,8 +57,8 @@ export default function ExperiencePage() {
                   </h1>
                   <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl mb-12">
                     {isPl
-                      ? "Przegląd mojej dotychczasowej ścieżki kariery, kluczowych ról i projektów, w których brałem udział. Każde z tych miejsc ukształtowało moje kompetencje inżynierskie i przygotowało mnie na nowe wyzwania."
-                      : "An overview of my career path so far, key roles, and projects I have been involved in. Each of these places shaped my engineering skills and prepared me for new challenges."}
+                      ? 'W pracy zawodowej nie zamykam się w "bańce samego kodowania". Skuteczny developer to dla mnie ktoś, kto potrafi usiąść z biznesem, zrozumieć i doprecyzować wymagania, a następnie przełożyć je na czystą architekturę. Dużą wagę przywiązuję do kultury technicznej w zespole – chętnie angażuję się w procesy Code Review, dzielę się wiedzą i działam w oparciu o zwinne metodologie (Agile/Scrum), dbając o to, by każda linijka kodu wnosiła wartość dla użytkownika końcowego.'
+                      : `In my professional life, I don't confine myself to a "coding-only bubble." For me, an effective developer is someone who can sit down with the business, understand and refine the requirements, and then translate them into a clean architecture. I place great importance on the technical culture within the team – I eagerly engage in code review processes, share knowledge, and work based on agile methodologies (Agile/Scrum), ensuring that every line of code delivers value to the end user.`}
                   </p>
 
                   {/* Pozioma Oś Czasu jako przegląd (Overview) */}
@@ -106,7 +106,7 @@ export default function ExperiencePage() {
           </AnimatePresence>
 
           {/* Spis treści (Mobile/Tablet Only) */}
-          <TableOfContents 
+          <TableOfContents
             sections={sections}
             activeSection={activeSection}
             setActiveSection={setActiveSection}
@@ -120,7 +120,8 @@ export default function ExperiencePage() {
           <div className="space-y-16">
             <AnimatePresence mode="wait">
               {sections.map((section) => {
-                if (activeSection !== section.id && activeSection !== "") return null;
+                if (activeSection !== section.id && activeSection !== "")
+                  return null;
 
                 return (
                   <motion.div
@@ -139,7 +140,7 @@ export default function ExperiencePage() {
                           {section.data.company}
                         </h2>
                       </div>
-                      <p className="text-lg text-muted-foreground max-w-3xl md:ml-[4.5rem]">
+                      <p className="text-lg text-muted-foreground max-w-3xl md:ml-18">
                         {section.data.role[langKey]} •{" "}
                         {section.data.date[langKey]}
                       </p>
@@ -200,12 +201,13 @@ export default function ExperiencePage() {
         </div>
 
         {/* Prawa kolumna: Spis treści (Sidebar) - Desktop Only */}
-        <TableOfContents 
+        <TableOfContents
           sections={sections}
           activeSection={activeSection}
           setActiveSection={setActiveSection}
           language={language as "pl" | "en"}
           isMobile={false}
+          desktopClassName="xl:translate-x-16"
         />
       </div>
     </div>

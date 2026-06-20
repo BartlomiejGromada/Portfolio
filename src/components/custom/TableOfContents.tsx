@@ -15,6 +15,7 @@ interface TableOfContentsProps {
   isMobile?: boolean;
   showOverview?: boolean;
   overviewText?: { pl: string; en: string };
+  desktopClassName?: string;
 }
 
 export function TableOfContents({
@@ -25,6 +26,7 @@ export function TableOfContents({
   isMobile = false,
   showOverview = false,
   overviewText = { pl: "Przegląd", en: "Overview" },
+  desktopClassName = "",
 }: TableOfContentsProps) {
   const isPl = language === "pl";
 
@@ -83,7 +85,7 @@ export function TableOfContents({
 
   // Desktop TOC
   return (
-    <div className="hidden xl:block w-56 shrink-0 relative xl:ml-16">
+    <div className={`hidden xl:block w-56 shrink-0 relative xl:ml-16 ${desktopClassName}`}>
       <div className="sticky top-24 z-30">
         <motion.div
           initial={{ opacity: 0, x: 20 }}

@@ -3,6 +3,7 @@
 import { motion, Variants } from "framer-motion";
 import { FileText, Mail } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { CodeWindow } from "./CodeWindow";
 import { useLanguage } from "@/context/LanguageContext";
@@ -10,6 +11,7 @@ import { useLanguage } from "@/context/LanguageContext";
 export function HeroSection() {
   const { t, language } = useLanguage();
   const portfolioData = usePortfolio();
+  const [isCvExpanded, setIsCvExpanded] = useState(false);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -76,17 +78,48 @@ export function HeroSection() {
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center gap-4 pt-4"
           >
-            <Link
-              href={portfolioData.cvUrl[language as 'pl' | 'en']}
-              target="_blank"
-              className="group flex items-center justify-center space-x-2 bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-semibold transition-all tracking-wider hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg w-full sm:w-auto sm:min-w-[180px] text-sm md:text-base"
+            <div 
+              className="relative flex items-stretch bg-primary rounded-full overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl w-full sm:w-auto"
+              onMouseEnter={() => setIsCvExpanded(true)}
+              onMouseLeave={() => setIsCvExpanded(false)}
+              onClick={() => setIsCvExpanded(!isCvExpanded)}
             >
-              <FileText className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span>{t("hero.resumeBtn")}</span>
-            </Link>
+              <div className="flex items-center justify-center px-6 md:px-8 py-3.5 space-x-2 text-background font-semibold tracking-wider whitespace-nowrap cursor-pointer flex-1 sm:flex-none">
+                <FileText className="w-5 h-5 transition-transform" />
+                <span>{t("hero.resumeBtn")}</span>
+              </div>
+
+              <motion.div
+                initial={{ width: 0, opacity: 0 }}
+                animate={{ 
+                  width: isCvExpanded ? "auto" : 0, 
+                  opacity: isCvExpanded ? 1 : 0 
+                }}
+                className="flex items-center overflow-hidden bg-primary"
+              >
+                <div className="flex items-center pr-2 pl-2 border-l border-background/20 py-2">
+                  <Link 
+                    href={portfolioData.cvUrl.pl} 
+                    target="_blank"
+                    className="px-3 py-1.5 mx-1 text-sm font-bold bg-background/20 text-background rounded-full hover:bg-background hover:text-primary transition-colors whitespace-nowrap"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    PL
+                  </Link>
+                  <Link 
+                    href={portfolioData.cvUrl.en} 
+                    target="_blank"
+                    className="px-3 py-1.5 mx-1 text-sm font-bold bg-background/20 text-background rounded-full hover:bg-background hover:text-primary transition-colors whitespace-nowrap"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    EN
+                  </Link>
+                </div>
+              </motion.div>
+            </div>
 
             <Link
-              href="mailto:bartlomiejgromada97@gmail.com"
+              href={`mailto:${portfolioData.email}`}
               className="group flex items-center justify-center space-x-2 bg-secondary/30 backdrop-blur-md border border-border-ghost text-foreground px-8 py-3.5 rounded-full font-semibold transition-all tracking-wider hover:bg-secondary/50 hover:-translate-y-0.5 hover:shadow-lg w-full sm:w-auto sm:min-w-[180px] text-sm md:text-base"
             >
               <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />

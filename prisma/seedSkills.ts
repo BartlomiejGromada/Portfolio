@@ -7,8 +7,8 @@ const skillsData = [
     category: { pl: "Backend", en: "Backend" },
     iconName: "Server",
     description: {
-      pl: "W pracy z backendem stawiam na niezawodność, skalowalność i czystą architekturę. Projektując logikę serwerową, kieruję się zasadami SOLID oraz wzorcami takimi jak CQRS i DDD, co pozwala mi tworzyć systemy łatwe w utrzymaniu i gotowe na rozwój biznesowy. Dbam o to, aby kod był nie tylko wydajny, ale też czytelny i dobrze udokumentowany.",
-      en: "When working with the backend, I focus on reliability, scalability, and clean architecture. While designing server-side logic, I follow SOLID principles and patterns such as CQRS and DDD, which allows me to create maintainable systems ready for business growth. I ensure that the code is not only performant but also readable and well-documented.",
+      pl: "W pracy z backendem stawiam na niezawodność, skalowalność i czystą architekturę. Nie sztuką jest napisać kod, który działa dzisiaj – sztuką jest napisać go tak, by za dwa lata inny deweloper mógł go bezpiecznie rozwijać. Kieruję się zasadami, które chronią projekt przed tzw. długiem technicznym.",
+      en: "When working with the backend, I focus on reliability, scalability and clean architecture. It's not an art to write code that works today - the art is to write it so that another developer can safely develop it in two years. I am guided by principles that protect the project against the so-called technical debt.",
     },
     items: [
       {
@@ -547,38 +547,211 @@ const skillsData = [
     iconName: "Database",
     description: {
       pl: "Projektując struktury danych, dobieram rozwiązania technologiczne bezpośrednio do wymagań architektonicznych i biznesowych systemu. Skupiam się na zapewnieniu pełnej integralności danych, optymalizacji wydajności zapytań pod kątem dużych obciążeń oraz efektywnym wykorzystaniu pamięci podręcznej.",
-      en: "When designing data structures, I match technological solutions directly to the architectural and business requirements of the system. I focus on ensuring full data integrity, optimizing query performance for heavy loads, and efficiently utilizing caching."
+      en: "When designing data structures, I match technological solutions directly to the architectural and business requirements of the system. I focus on ensuring full data integrity, optimizing query performance for heavy loads, and efficiently utilizing caching.",
     },
     items: [
-      { name: "Relational Database Design", description: { pl: "Projektowanie relacyjnych struktur danych z uwzględnieniem zasad normalizacji, zapewniających spójność informacji, ograniczenie redundancji oraz łatwość dalszego rozwoju systemu.", en: "Designing relational data structures adhering to normalization principles, ensuring information consistency, reducing redundancy, and facilitating future system evolution." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Database Optimization", description: { pl: "Analiza i optymalizacja wydajności baz danych poprzez odpowiednie projektowanie indeksów, usprawnianie zapytań oraz eliminowanie wąskich gardeł wpływających na czas odpowiedzi aplikacji.", en: "Analyzing and optimizing database performance through proper index design, query tuning, and eliminating bottlenecks affecting application response times." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Data Caching Strategies", description: { pl: "Wykorzystanie mechanizmów pamięci podręcznej do ograniczania liczby operacji na bazie danych, zwiększania wydajności systemu oraz skracania czasu dostępu do często wykorzystywanych danych.", en: "Utilizing caching mechanisms to limit the number of database operations, increase system performance, and shorten access times to frequently used data." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Database Transactions (ACID)", description: { pl: "Zarządzanie operacjami na danych z zachowaniem zasad ACID, gwarantujących niezawodność, integralność oraz spójność informacji nawet w środowiskach o wysokiej współbieżności.", en: "Managing data operations while adhering to ACID principles, guaranteeing reliability, integrity, and information consistency even in highly concurrent environments." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      
-      { name: "MS SQL Server", description: { pl: "Główny relacyjny system zarządzania bazą danych (RDBMS) w moim stosie technologicznym, wykorzystywany do budowy stabilnych i bezpiecznych rozwiązań enterprise.", en: "The main relational database management system (RDBMS) in my technology stack, used for building stable and secure enterprise solutions." }, subcategory: { pl: "Narzędzia i Systemy DBMS", en: "Tools and DBMS Systems" } },
-      { name: "PostgreSQL", description: { pl: "Zaawansowana, otwartoźródłowa relacyjna baza danych, z której korzystam przy projektach wymagających elastyczności, dużej wydajności oraz wsparcia dla typów JSON.", en: "An advanced, open-source relational database that I use for projects requiring flexibility, high performance, and JSON support." }, subcategory: { pl: "Narzędzia i Systemy DBMS", en: "Tools and DBMS Systems" } },
-      { name: "Redis", description: { pl: "Ultraszybka baza danych in-memory typu klucz-wartość, stosowana przeze mnie głównie jako rozproszony cache oraz magazyn sesji w architekturze mikroserwisowej i modularnej.", en: "An ultra-fast in-memory key-value database, mainly used by me as a distributed cache and session store in microservice and modular architectures." }, subcategory: { pl: "Narzędzia i Systemy DBMS", en: "Tools and DBMS Systems" } },
-      { name: "NoSQL (Firebase / MongoDB)", description: { pl: "Nierelacyjne bazy danych wykorzystywane do elastycznego przechowywania dokumentów JSON oraz szybkiej synchronizacji danych w czasie rzeczywistym.", en: "Non-relational databases used for flexible JSON document storage and fast real-time data synchronization." }, subcategory: { pl: "Narzędzia i Systemy DBMS", en: "Tools and DBMS Systems" } },
-      { name: "T-SQL / pgSQL", description: { pl: "Języki proceduralne dedykowane dla SQL Server oraz PostgreSQL, służące do pisania wydajnych zapytań, procedur składowanych, funkcji oraz wyzwalaczy (triggers).", en: "Procedural languages dedicated to SQL Server and PostgreSQL, used for writing efficient queries, stored procedures, functions, and triggers." }, subcategory: { pl: "Narzędzia i Systemy DBMS", en: "Tools and DBMS Systems" } }
+      {
+        name: "Relational Database Design",
+        description: {
+          pl: "Projektowanie relacyjnych struktur danych z uwzględnieniem zasad normalizacji, zapewniających spójność informacji, ograniczenie redundancji oraz łatwość dalszego rozwoju systemu.",
+          en: "Designing relational data structures adhering to normalization principles, ensuring information consistency, reducing redundancy, and facilitating future system evolution.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Database Optimization",
+        description: {
+          pl: "Analiza i optymalizacja wydajności baz danych poprzez odpowiednie projektowanie indeksów, usprawnianie zapytań oraz eliminowanie wąskich gardeł wpływających na czas odpowiedzi aplikacji.",
+          en: "Analyzing and optimizing database performance through proper index design, query tuning, and eliminating bottlenecks affecting application response times.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Data Caching Strategies",
+        description: {
+          pl: "Wykorzystanie mechanizmów pamięci podręcznej do ograniczania liczby operacji na bazie danych, zwiększania wydajności systemu oraz skracania czasu dostępu do często wykorzystywanych danych.",
+          en: "Utilizing caching mechanisms to limit the number of database operations, increase system performance, and shorten access times to frequently used data.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Database Transactions (ACID)",
+        description: {
+          pl: "Zarządzanie operacjami na danych z zachowaniem zasad ACID, gwarantujących niezawodność, integralność oraz spójność informacji nawet w środowiskach o wysokiej współbieżności.",
+          en: "Managing data operations while adhering to ACID principles, guaranteeing reliability, integrity, and information consistency even in highly concurrent environments.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+
+      {
+        name: "MS SQL Server",
+        description: {
+          pl: "Główny relacyjny system zarządzania bazą danych (RDBMS) w moim stosie technologicznym, wykorzystywany do budowy stabilnych i bezpiecznych rozwiązań enterprise.",
+          en: "The main relational database management system (RDBMS) in my technology stack, used for building stable and secure enterprise solutions.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Systemy DBMS",
+          en: "Tools and DBMS Systems",
+        },
+      },
+      {
+        name: "PostgreSQL",
+        description: {
+          pl: "Zaawansowana, otwartoźródłowa relacyjna baza danych, z której korzystam przy projektach wymagających elastyczności, dużej wydajności oraz wsparcia dla typów JSON.",
+          en: "An advanced, open-source relational database that I use for projects requiring flexibility, high performance, and JSON support.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Systemy DBMS",
+          en: "Tools and DBMS Systems",
+        },
+      },
+      {
+        name: "Redis",
+        description: {
+          pl: "Ultraszybka baza danych in-memory typu klucz-wartość, stosowana przeze mnie głównie jako rozproszony cache oraz magazyn sesji w architekturze mikroserwisowej i modularnej.",
+          en: "An ultra-fast in-memory key-value database, mainly used by me as a distributed cache and session store in microservice and modular architectures.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Systemy DBMS",
+          en: "Tools and DBMS Systems",
+        },
+      },
+      {
+        name: "NoSQL (Firebase / MongoDB)",
+        description: {
+          pl: "Nierelacyjne bazy danych wykorzystywane do elastycznego przechowywania dokumentów JSON oraz szybkiej synchronizacji danych w czasie rzeczywistym.",
+          en: "Non-relational databases used for flexible JSON document storage and fast real-time data synchronization.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Systemy DBMS",
+          en: "Tools and DBMS Systems",
+        },
+      },
+      {
+        name: "T-SQL / pgSQL",
+        description: {
+          pl: "Języki proceduralne dedykowane dla SQL Server oraz PostgreSQL, służące do pisania wydajnych zapytań, procedur składowanych, funkcji oraz wyzwalaczy (triggers).",
+          en: "Procedural languages dedicated to SQL Server and PostgreSQL, used for writing efficient queries, stored procedures, functions, and triggers.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Systemy DBMS",
+          en: "Tools and DBMS Systems",
+        },
+      },
     ],
   },
   {
-    category: { pl: "AI (Artificial Intelligence)", en: "AI (Artificial Intelligence)" },
+    category: {
+      pl: "AI (Artificial Intelligence)",
+      en: "AI (Artificial Intelligence)",
+    },
     iconName: "Bot",
     description: {
       pl: "Wykorzystuję sztuczną inteligencję do zwiększania produktywności, automatyzacji procesów oraz wspierania procesu tworzenia oprogramowania. Łączę nowoczesne modele językowe, narzędzia automatyzacji oraz rozwiązania agentowe w celu budowania efektywnych i skalowalnych rozwiązań biznesowych.",
-      en: "I use artificial intelligence to increase productivity, automate processes, and support software development. I combine modern language models, automation tools, and agent-based solutions to build efficient and scalable business solutions."
+      en: "I use artificial intelligence to increase productivity, automate processes, and support software development. I combine modern language models, automation tools, and agent-based solutions to build efficient and scalable business solutions.",
     },
     items: [
-      { name: "AI-Driven Development", description: { pl: "Świadome wykorzystanie modeli AI oraz asystentów programistycznych do przyspieszania tworzenia oprogramowania, analizy kodu, generowania rozwiązań oraz wspomagania procesów debugowania.", en: "Conscious use of AI models and programming assistants to accelerate software development, code analysis, solution generation, and debugging processes." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Prompt Engineering", description: { pl: "Projektowanie i optymalizacja instrukcji dla modeli językowych w celu uzyskiwania precyzyjnych, spójnych i przewidywalnych rezultatów w różnych scenariuszach biznesowych i technicznych.", en: "Designing and optimizing instructions for language models to achieve precise, consistent, and predictable results in various business and technical scenarios." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Business Process Automation", description: { pl: "Budowa inteligentnych przepływów pracy integrujących modele AI z zewnętrznymi systemami i usługami, pozwalających ograniczać manualne operacje oraz zwiększać efektywność procesów.", en: "Building intelligent workflows integrating AI models with external systems and services, reducing manual operations and increasing process efficiency." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "AI Agents & Workflows", description: { pl: "Projektowanie systemów agentowych zdolnych do wykonywania wieloetapowych zadań, podejmowania decyzji oraz współpracy z narzędziami i źródłami danych.", en: "Designing agent systems capable of performing multi-step tasks, making decisions, and collaborating with tools and data sources." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      
-      { name: "Google Antigravity & AI Workspaces", description: { pl: "Nowoczesne środowiska wspierające rozwój oprogramowania, automatyzację procesów oraz eksperymentowanie z rozwiązaniami opartymi na sztucznej inteligencji.", en: "Modern environments supporting software development, process automation, and experimenting with artificial intelligence-based solutions." }, subcategory: { pl: "Narzędzia i Ekosystemy", en: "Tools and Ecosystems" } },
-      { name: "Make.com & n8n", description: { pl: "Platformy automatyzacji wykorzystywane do budowy workflowów, integracji systemów oraz tworzenia agentów AI realizujących złożone procesy biznesowe.", en: "Automation platforms used for building workflows, integrating systems, and creating AI agents executing complex business processes." }, subcategory: { pl: "Narzędzia i Ekosystemy", en: "Tools and Ecosystems" } },
-      { name: "NotebookLM", description: { pl: "Narzędzie wspierające analizę dokumentów, syntezę wiedzy oraz pozyskiwanie informacji z wielu źródeł danych jednocześnie.", en: "A tool supporting document analysis, knowledge synthesis, and information retrieval from multiple data sources simultaneously." }, subcategory: { pl: "Narzędzia i Ekosystemy", en: "Tools and Ecosystems" } },
-      { name: "LLM Models (GPT, Gemini, Claude, Bielik)", description: { pl: "Praktyczne wykorzystanie dużych modeli językowych do generowania treści, analizy danych, automatyzacji procesów oraz budowy rozwiązań wspieranych przez AI.", en: "Practical use of large language models for content generation, data analysis, process automation, and building AI-supported solutions." }, subcategory: { pl: "Narzędzia i Ekosystemy", en: "Tools and Ecosystems" } }
+      {
+        name: "AI-Driven Development",
+        description: {
+          pl: "Świadome wykorzystanie modeli AI oraz asystentów programistycznych do przyspieszania tworzenia oprogramowania, analizy kodu, generowania rozwiązań oraz wspomagania procesów debugowania.",
+          en: "Conscious use of AI models and programming assistants to accelerate software development, code analysis, solution generation, and debugging processes.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Prompt Engineering",
+        description: {
+          pl: "Projektowanie i optymalizacja instrukcji dla modeli językowych w celu uzyskiwania precyzyjnych, spójnych i przewidywalnych rezultatów w różnych scenariuszach biznesowych i technicznych.",
+          en: "Designing and optimizing instructions for language models to achieve precise, consistent, and predictable results in various business and technical scenarios.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Business Process Automation",
+        description: {
+          pl: "Budowa inteligentnych przepływów pracy integrujących modele AI z zewnętrznymi systemami i usługami, pozwalających ograniczać manualne operacje oraz zwiększać efektywność procesów.",
+          en: "Building intelligent workflows integrating AI models with external systems and services, reducing manual operations and increasing process efficiency.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "AI Agents & Workflows",
+        description: {
+          pl: "Projektowanie systemów agentowych zdolnych do wykonywania wieloetapowych zadań, podejmowania decyzji oraz współpracy z narzędziami i źródłami danych.",
+          en: "Designing agent systems capable of performing multi-step tasks, making decisions, and collaborating with tools and data sources.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+
+      {
+        name: "Google Antigravity & AI Workspaces",
+        description: {
+          pl: "Nowoczesne środowiska wspierające rozwój oprogramowania, automatyzację procesów oraz eksperymentowanie z rozwiązaniami opartymi na sztucznej inteligencji.",
+          en: "Modern environments supporting software development, process automation, and experimenting with artificial intelligence-based solutions.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Ekosystemy",
+          en: "Tools and Ecosystems",
+        },
+      },
+      {
+        name: "Make.com & n8n",
+        description: {
+          pl: "Platformy automatyzacji wykorzystywane do budowy workflowów, integracji systemów oraz tworzenia agentów AI realizujących złożone procesy biznesowe.",
+          en: "Automation platforms used for building workflows, integrating systems, and creating AI agents executing complex business processes.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Ekosystemy",
+          en: "Tools and Ecosystems",
+        },
+      },
+      {
+        name: "NotebookLM",
+        description: {
+          pl: "Narzędzie wspierające analizę dokumentów, syntezę wiedzy oraz pozyskiwanie informacji z wielu źródeł danych jednocześnie.",
+          en: "A tool supporting document analysis, knowledge synthesis, and information retrieval from multiple data sources simultaneously.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Ekosystemy",
+          en: "Tools and Ecosystems",
+        },
+      },
+      {
+        name: "LLM Models (GPT, Gemini, Claude, Bielik)",
+        description: {
+          pl: "Praktyczne wykorzystanie dużych modeli językowych do generowania treści, analizy danych, automatyzacji procesów oraz budowy rozwiązań wspieranych przez AI.",
+          en: "Practical use of large language models for content generation, data analysis, process automation, and building AI-supported solutions.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Ekosystemy",
+          en: "Tools and Ecosystems",
+        },
+      },
     ],
   },
   {
@@ -586,19 +759,109 @@ const skillsData = [
     iconName: "TestTubes",
     description: {
       pl: "Testowanie traktuję jako integralny element procesu wytwarzania oprogramowania, pozwalający zapewnić wysoką jakość, stabilność oraz niezawodność aplikacji. Tworzę zautomatyzowane testy, które weryfikują zarówno logikę biznesową, jak i poprawność współpracy poszczególnych komponentów systemu.",
-      en: "I treat testing as an integral part of the software development process, ensuring high quality, stability, and reliability of applications. I create automated tests that verify both business logic and the correct cooperation of individual system components."
+      en: "I treat testing as an integral part of the software development process, ensuring high quality, stability, and reliability of applications. I create automated tests that verify both business logic and the correct cooperation of individual system components.",
     },
     items: [
-      { name: "Unit Testing", description: { pl: "Weryfikacja pojedynczych komponentów i jednostek kodu w izolacji od pozostałych elementów systemu w celu szybkiego wykrywania błędów oraz potwierdzenia poprawności logiki biznesowej.", en: "Verification of individual components and code units in isolation from other system elements for quick bug detection and confirmation of business logic correctness." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Integration Testing", description: { pl: "Sprawdzanie współpracy wielu komponentów aplikacji, w tym komunikacji z bazami danych, kolejkami wiadomości oraz zewnętrznymi usługami.", en: "Checking the cooperation of multiple application components, including communication with databases, message queues, and external services." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Arrange-Act-Assert (AAA)", description: { pl: "Popularny wzorzec organizacji testów, zwiększający czytelność i utrzymywalność kodu testowego poprzez wyraźne rozdzielenie przygotowania, działania i weryfikacji.", en: "A popular test organization pattern increasing test code readability and maintainability through clear separation of preparation, execution, and verification." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Test-Driven Development (TDD)", description: { pl: "Podejście do tworzenia oprogramowania zakładające pisanie testów przed implementacją funkcjonalności, wspierające projektowanie czytelnej i łatwej w utrzymaniu architektury.", en: "A software development approach assuming writing tests before feature implementation, supporting the design of clear and maintainable architecture." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Test Isolation", description: { pl: "Projektowanie testów w sposób zapewniający ich pełną niezależność od środowiska uruchomieniowego oraz innych testów, co zwiększa ich powtarzalność i wiarygodność.", en: "Designing tests in a way that ensures their full independence from the runtime environment and other tests, increasing their repeatability and reliability." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      
-      { name: "xUnit", description: { pl: "Framework testowy dla platformy .NET wykorzystywany do tworzenia i uruchamiania testów jednostkowych oraz integracyjnych.", en: "A testing framework for the .NET platform used for creating and running unit and integration tests." }, subcategory: { pl: "Narzędzia i Frameworki", en: "Tools and Frameworks" } },
-      { name: "Testcontainers", description: { pl: "Biblioteka umożliwiająca uruchamianie rzeczywistych zależności infrastrukturalnych w kontenerach Docker na potrzeby testów integracyjnych.", en: "A library that allows running real infrastructural dependencies in Docker containers for integration tests." }, subcategory: { pl: "Narzędzia i Frameworki", en: "Tools and Frameworks" } },
-      { name: "Moq", description: { pl: "Biblioteka służąca do tworzenia obiektów pozorowanych (mocków), pozwalająca izolować testowaną logikę od jej zależności.", en: "A library used to create mock objects, allowing the tested logic to be isolated from its dependencies." }, subcategory: { pl: "Narzędzia i Frameworki", en: "Tools and Frameworks" } },
-      { name: "Bogus", description: { pl: "Narzędzie do generowania realistycznych danych testowych wykorzystywanych podczas testowania aplikacji i scenariuszy biznesowych.", en: "A tool for generating realistic test data used when testing applications and business scenarios." }, subcategory: { pl: "Narzędzia i Frameworki", en: "Tools and Frameworks" } }
+      {
+        name: "Unit Testing",
+        description: {
+          pl: "Weryfikacja pojedynczych komponentów i jednostek kodu w izolacji od pozostałych elementów systemu w celu szybkiego wykrywania błędów oraz potwierdzenia poprawności logiki biznesowej.",
+          en: "Verification of individual components and code units in isolation from other system elements for quick bug detection and confirmation of business logic correctness.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Integration Testing",
+        description: {
+          pl: "Sprawdzanie współpracy wielu komponentów aplikacji, w tym komunikacji z bazami danych, kolejkami wiadomości oraz zewnętrznymi usługami.",
+          en: "Checking the cooperation of multiple application components, including communication with databases, message queues, and external services.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Arrange-Act-Assert (AAA)",
+        description: {
+          pl: "Popularny wzorzec organizacji testów, zwiększający czytelność i utrzymywalność kodu testowego poprzez wyraźne rozdzielenie przygotowania, działania i weryfikacji.",
+          en: "A popular test organization pattern increasing test code readability and maintainability through clear separation of preparation, execution, and verification.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Test-Driven Development (TDD)",
+        description: {
+          pl: "Podejście do tworzenia oprogramowania zakładające pisanie testów przed implementacją funkcjonalności, wspierające projektowanie czytelnej i łatwej w utrzymaniu architektury.",
+          en: "A software development approach assuming writing tests before feature implementation, supporting the design of clear and maintainable architecture.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Test Isolation",
+        description: {
+          pl: "Projektowanie testów w sposób zapewniający ich pełną niezależność od środowiska uruchomieniowego oraz innych testów, co zwiększa ich powtarzalność i wiarygodność.",
+          en: "Designing tests in a way that ensures their full independence from the runtime environment and other tests, increasing their repeatability and reliability.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+
+      {
+        name: "xUnit",
+        description: {
+          pl: "Framework testowy dla platformy .NET wykorzystywany do tworzenia i uruchamiania testów jednostkowych oraz integracyjnych.",
+          en: "A testing framework for the .NET platform used for creating and running unit and integration tests.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Frameworki",
+          en: "Tools and Frameworks",
+        },
+      },
+      {
+        name: "Testcontainers",
+        description: {
+          pl: "Biblioteka umożliwiająca uruchamianie rzeczywistych zależności infrastrukturalnych w kontenerach Docker na potrzeby testów integracyjnych.",
+          en: "A library that allows running real infrastructural dependencies in Docker containers for integration tests.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Frameworki",
+          en: "Tools and Frameworks",
+        },
+      },
+      {
+        name: "Moq",
+        description: {
+          pl: "Biblioteka służąca do tworzenia obiektów pozorowanych (mocków), pozwalająca izolować testowaną logikę od jej zależności.",
+          en: "A library used to create mock objects, allowing the tested logic to be isolated from its dependencies.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Frameworki",
+          en: "Tools and Frameworks",
+        },
+      },
+      {
+        name: "Bogus",
+        description: {
+          pl: "Narzędzie do generowania realistycznych danych testowych wykorzystywanych podczas testowania aplikacji i scenariuszy biznesowych.",
+          en: "A tool for generating realistic test data used when testing applications and business scenarios.",
+        },
+        subcategory: {
+          pl: "Narzędzia i Frameworki",
+          en: "Tools and Frameworks",
+        },
+      },
     ],
   },
   {
@@ -606,37 +869,170 @@ const skillsData = [
     iconName: "Cloud",
     description: {
       pl: "Wykorzystuję praktyki DevOps, rozwiązania chmurowe oraz konteneryzację do automatyzacji procesów wytwórczych i wdrożeniowych. Dzięki temu możliwe jest szybsze dostarczanie oprogramowania, utrzymanie spójnych środowisk oraz zwiększenie niezawodności aplikacji na każdym etapie jej rozwoju.",
-      en: "I use DevOps practices, cloud solutions, and containerization to automate development and deployment processes. This enables faster software delivery, maintaining consistent environments, and increasing application reliability at every stage of its development."
+      en: "I use DevOps practices, cloud solutions, and containerization to automate development and deployment processes. This enables faster software delivery, maintaining consistent environments, and increasing application reliability at every stage of its development.",
     },
     items: [
-      { name: "CI/CD (Continuous Integration / Continuous Deployment)", description: { pl: "Automatyzacja procesów budowania, testowania i wdrażania aplikacji, pozwalająca na częste, bezpieczne i przewidywalne dostarczanie nowych wersji oprogramowania.", en: "Automation of application building, testing, and deployment processes, allowing for frequent, safe, and predictable delivery of new software versions." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Containerization", description: { pl: "Standaryzacja środowisk uruchomieniowych poprzez wykorzystanie kontenerów, zapewniająca spójność działania aplikacji niezależnie od platformy.", en: "Standardization of runtime environments through the use of containers, ensuring consistent application operation regardless of the platform." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      
-      { name: "Azure DevOps", description: { pl: "Platforma wspierająca zarządzanie cyklem życia oprogramowania, obejmująca repozytoria kodu, planowanie prac oraz automatyzację procesów CI/CD.", en: "A platform supporting software lifecycle management, including code repositories, work planning, and CI/CD process automation." }, subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" } },
-      { name: "Docker", description: { pl: "Technologia konteneryzacji umożliwiająca pakowanie aplikacji wraz z ich zależnościami i uruchamianie ich w spójny sposób na różnych środowiskach.", en: "A containerization technology that allows packaging applications with their dependencies and running them consistently across different environments." }, subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" } },
-      { name: "Azure Service Bus", description: { pl: "Usługa komunikacji asynchronicznej umożliwiająca niezawodną wymianę wiadomości pomiędzy komponentami systemów rozproszonych.", en: "An asynchronous communication service enabling reliable message exchange between components of distributed systems." }, subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" } },
-      { name: "Azure Blob Storage", description: { pl: "Chmurowa usługa przechowywania danych wykorzystywana do składowania plików, dokumentów, multimediów oraz innych danych niestrukturalnych.", en: "A cloud data storage service used for storing files, documents, multimedia, and other unstructured data." }, subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" } },
-      { name: "Git (GitHub / GitLab)", description: { pl: "Rozproszony system kontroli wersji wykorzystywany do zarządzania kodem źródłowym, współpracy zespołowej oraz śledzenia zmian w projekcie.", en: "A distributed version control system used for source code management, team collaboration, and tracking project changes." }, subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" } }
+      {
+        name: "CI/CD (Continuous Integration / Continuous Deployment)",
+        description: {
+          pl: "Automatyzacja procesów budowania, testowania i wdrażania aplikacji, pozwalająca na częste, bezpieczne i przewidywalne dostarczanie nowych wersji oprogramowania.",
+          en: "Automation of application building, testing, and deployment processes, allowing for frequent, safe, and predictable delivery of new software versions.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Containerization",
+        description: {
+          pl: "Standaryzacja środowisk uruchomieniowych poprzez wykorzystanie kontenerów, zapewniająca spójność działania aplikacji niezależnie od platformy.",
+          en: "Standardization of runtime environments through the use of containers, ensuring consistent application operation regardless of the platform.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+
+      {
+        name: "Azure DevOps",
+        description: {
+          pl: "Platforma wspierająca zarządzanie cyklem życia oprogramowania, obejmująca repozytoria kodu, planowanie prac oraz automatyzację procesów CI/CD.",
+          en: "A platform supporting software lifecycle management, including code repositories, work planning, and CI/CD process automation.",
+        },
+        subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" },
+      },
+      {
+        name: "Docker",
+        description: {
+          pl: "Technologia konteneryzacji umożliwiająca pakowanie aplikacji wraz z ich zależnościami i uruchamianie ich w spójny sposób na różnych środowiskach.",
+          en: "A containerization technology that allows packaging applications with their dependencies and running them consistently across different environments.",
+        },
+        subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" },
+      },
+      {
+        name: "Azure Service Bus",
+        description: {
+          pl: "Usługa komunikacji asynchronicznej umożliwiająca niezawodną wymianę wiadomości pomiędzy komponentami systemów rozproszonych.",
+          en: "An asynchronous communication service enabling reliable message exchange between components of distributed systems.",
+        },
+        subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" },
+      },
+      {
+        name: "Azure Blob Storage",
+        description: {
+          pl: "Chmurowa usługa przechowywania danych wykorzystywana do składowania plików, dokumentów, multimediów oraz innych danych niestrukturalnych.",
+          en: "A cloud data storage service used for storing files, documents, multimedia, and other unstructured data.",
+        },
+        subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" },
+      },
+      {
+        name: "Git (GitHub / GitLab)",
+        description: {
+          pl: "Rozproszony system kontroli wersji wykorzystywany do zarządzania kodem źródłowym, współpracy zespołowej oraz śledzenia zmian w projekcie.",
+          en: "A distributed version control system used for source code management, team collaboration, and tracking project changes.",
+        },
+        subcategory: { pl: "Narzędzia i Platformy", en: "Tools and Platforms" },
+      },
     ],
   },
   {
-    category: { pl: "Project Management & Collaboration", en: "Project Management & Collaboration" },
+    category: {
+      pl: "Project Management & Collaboration",
+      en: "Project Management & Collaboration",
+    },
     iconName: "Users",
     description: {
       pl: "Skuteczne tworzenie oprogramowania wymaga nie tylko umiejętności technicznych, ale również sprawnej komunikacji i dobrej organizacji pracy. Na co dzień współpracuję z analitykami, projektantami UI/UX oraz innymi programistami, uczestnicząc w całym procesie dostarczania wartościowych rozwiązań biznesowych.",
-      en: "Effective software development requires not only technical skills but also efficient communication and good work organization. On a daily basis, I collaborate with analysts, UI/UX designers, and other developers, participating in the entire process of delivering valuable business solutions."
+      en: "Effective software development requires not only technical skills but also efficient communication and good work organization. On a daily basis, I collaborate with analysts, UI/UX designers, and other developers, participating in the entire process of delivering valuable business solutions.",
     },
     items: [
-      { name: "Agile / Scrum", description: { pl: "Praca w oparciu o zwinne metodyki umożliwiające iteracyjne dostarczanie oprogramowania, szybką adaptację do zmian oraz regularne doskonalenie procesów zespołowych.", en: "Working based on agile methodologies enabling iterative software delivery, quick adaptation to changes, and regular improvement of team processes." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Technical Documentation", description: { pl: "Tworzenie i utrzymywanie dokumentacji technicznej, opisów architektury oraz decyzji projektowych wspierających rozwój i utrzymanie systemów.", en: "Creating and maintaining technical documentation, architecture descriptions, and design decisions supporting the development and maintenance of systems." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Cross-functional Collaboration", description: { pl: "Współpraca z zespołami biznesowymi, projektowymi i technicznymi w celu skutecznego przekładania wymagań na funkcjonalne rozwiązania programistyczne.", en: "Collaboration with business, design, and technical teams to effectively translate requirements into functional programming solutions." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      { name: "Requirements Analysis", description: { pl: "Analiza wymagań biznesowych i technicznych pozwalająca na właściwe zaprojektowanie funkcjonalności oraz ograniczenie ryzyka błędnych założeń projektowych.", en: "Analysis of business and technical requirements allowing for proper functionality design and mitigating the risk of incorrect project assumptions." }, subcategory: { pl: "Podejścia i Metodologie", en: "Approaches and Methodologies" } },
-      
-      { name: "Jira", description: { pl: "Narzędzie wykorzystywane do planowania prac, zarządzania zadaniami oraz monitorowania postępów realizacji projektów.", en: "A tool used for work planning, task management, and monitoring project progress." }, subcategory: { pl: "Narzędzia", en: "Tools" } },
-      { name: "Confluence", description: { pl: "Platforma służąca do tworzenia, organizowania i udostępniania dokumentacji projektowej oraz technicznej.", en: "A platform used for creating, organizing, and sharing project and technical documentation." }, subcategory: { pl: "Narzędzia", en: "Tools" } },
-      { name: "Slack", description: { pl: "Komunikator wspierający codzienną współpracę zespołową oraz sprawną wymianę informacji pomiędzy członkami projektu.", en: "A communicator supporting daily team collaboration and efficient information exchange among project members." }, subcategory: { pl: "Narzędzia", en: "Tools" } },
-      { name: "Miro", description: { pl: "Narzędzie wykorzystywane do modelowania procesów, warsztatów projektowych oraz wizualizacji pomysłów i architektury systemów.", en: "A tool used for process modeling, design workshops, and visualizing ideas and system architecture." }, subcategory: { pl: "Narzędzia", en: "Tools" } },
-      { name: "Figma", description: { pl: "Platforma służąca do współpracy z projektantami UI/UX oraz analizy i implementacji interfejsów użytkownika.", en: "A platform used for collaborating with UI/UX designers and analyzing and implementing user interfaces." }, subcategory: { pl: "Narzędzia", en: "Tools" } }
+      {
+        name: "Agile / Scrum",
+        description: {
+          pl: "Praca w oparciu o zwinne metodyki umożliwiające iteracyjne dostarczanie oprogramowania, szybką adaptację do zmian oraz regularne doskonalenie procesów zespołowych.",
+          en: "Working based on agile methodologies enabling iterative software delivery, quick adaptation to changes, and regular improvement of team processes.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Technical Documentation",
+        description: {
+          pl: "Tworzenie i utrzymywanie dokumentacji technicznej, opisów architektury oraz decyzji projektowych wspierających rozwój i utrzymanie systemów.",
+          en: "Creating and maintaining technical documentation, architecture descriptions, and design decisions supporting the development and maintenance of systems.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Cross-functional Collaboration",
+        description: {
+          pl: "Współpraca z zespołami biznesowymi, projektowymi i technicznymi w celu skutecznego przekładania wymagań na funkcjonalne rozwiązania programistyczne.",
+          en: "Collaboration with business, design, and technical teams to effectively translate requirements into functional programming solutions.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+      {
+        name: "Requirements Analysis",
+        description: {
+          pl: "Analiza wymagań biznesowych i technicznych pozwalająca na właściwe zaprojektowanie funkcjonalności oraz ograniczenie ryzyka błędnych założeń projektowych.",
+          en: "Analysis of business and technical requirements allowing for proper functionality design and mitigating the risk of incorrect project assumptions.",
+        },
+        subcategory: {
+          pl: "Podejścia i Metodologie",
+          en: "Approaches and Methodologies",
+        },
+      },
+
+      {
+        name: "Jira",
+        description: {
+          pl: "Narzędzie wykorzystywane do planowania prac, zarządzania zadaniami oraz monitorowania postępów realizacji projektów.",
+          en: "A tool used for work planning, task management, and monitoring project progress.",
+        },
+        subcategory: { pl: "Narzędzia", en: "Tools" },
+      },
+      {
+        name: "Confluence",
+        description: {
+          pl: "Platforma służąca do tworzenia, organizowania i udostępniania dokumentacji projektowej oraz technicznej.",
+          en: "A platform used for creating, organizing, and sharing project and technical documentation.",
+        },
+        subcategory: { pl: "Narzędzia", en: "Tools" },
+      },
+      {
+        name: "Slack",
+        description: {
+          pl: "Komunikator wspierający codzienną współpracę zespołową oraz sprawną wymianę informacji pomiędzy członkami projektu.",
+          en: "A communicator supporting daily team collaboration and efficient information exchange among project members.",
+        },
+        subcategory: { pl: "Narzędzia", en: "Tools" },
+      },
+      {
+        name: "Miro",
+        description: {
+          pl: "Narzędzie wykorzystywane do modelowania procesów, warsztatów projektowych oraz wizualizacji pomysłów i architektury systemów.",
+          en: "A tool used for process modeling, design workshops, and visualizing ideas and system architecture.",
+        },
+        subcategory: { pl: "Narzędzia", en: "Tools" },
+      },
+      {
+        name: "Figma",
+        description: {
+          pl: "Platforma służąca do współpracy z projektantami UI/UX oraz analizy i implementacji interfejsów użytkownika.",
+          en: "A platform used for collaborating with UI/UX designers and analyzing and implementing user interfaces.",
+        },
+        subcategory: { pl: "Narzędzia", en: "Tools" },
+      },
     ],
   },
 ];

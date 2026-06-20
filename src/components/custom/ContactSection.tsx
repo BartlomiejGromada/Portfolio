@@ -11,8 +11,7 @@ export function ContactSection() {
   const portfolioData = usePortfolio();
   const isPl = language === 'pl';
   
-  // Przykładowy adres email, można łatwo zmienić
-  const emailAddress = "bartlomiejgromada97@gmail.com"; 
+  const emailAddress = portfolioData.email;
 
   return (
     <div className="w-full bg-background relative overflow-hidden">

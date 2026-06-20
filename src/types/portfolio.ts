@@ -22,6 +22,7 @@ export type PortfolioDataType = {
     github: string;
     linkedin: string;
   };
+  email: string;
   sourceCodeUrl: string;
   cvUrl: LocalizedString;
   skills: string[];

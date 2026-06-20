@@ -4,7 +4,21 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { usePortfolio } from "@/context/PortfolioContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Server, AppWindow, Smartphone, Database, Cloud, Building2, Wrench, ChevronUp, Bot, TestTubes, Users, Search, ArrowLeft } from "lucide-react";
+import {
+  Server,
+  AppWindow,
+  Smartphone,
+  Database,
+  Cloud,
+  Building2,
+  Wrench,
+  ChevronUp,
+  Bot,
+  TestTubes,
+  Users,
+  Search,
+  ArrowLeft,
+} from "lucide-react";
 import { SiDotnet, SiReact, SiTypescript } from "react-icons/si";
 import { TbBrandCSharp } from "react-icons/tb";
 import { VscAzure } from "react-icons/vsc";
@@ -31,7 +45,7 @@ const topTechStack = [
   { name: "TypeScript", icon: SiTypescript, color: "text-primary" },
   { name: "MS SQL Server", icon: DiMsqlServer, color: "text-primary" },
   { name: "PostgreSQL", icon: DiPostgresql, color: "text-primary" },
-  { name: "Azure", icon: VscAzure, color: "text-primary" }
+  { name: "Azure", icon: VscAzure, color: "text-primary" },
 ];
 
 export default function SkillsPage() {
@@ -42,26 +56,26 @@ export default function SkillsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [highlightedSkill, setHighlightedSkill] = useState("");
 
-  const allSkills = portfolioData.detailedSkills.flatMap(cat => 
-    cat.items.map(item => ({
+  const allSkills = portfolioData.detailedSkills.flatMap((cat) =>
+    cat.items.map((item) => ({
       ...item,
-      categoryId: cat.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-      categoryName: cat.category[language as 'pl' | 'en']
-    }))
+      categoryId: cat.category.en.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      categoryName: cat.category[language as "pl" | "en"],
+    })),
   );
 
   const handleSearchSelect = (skillName: string, categoryId: string) => {
     setActiveSection(categoryId);
     setSearchQuery("");
     setHighlightedSkill(skillName);
-    
+
     // Wait for the AnimatePresence to render the new section, then scroll
     setTimeout(() => {
-      const safeId = `skill-${skillName.replace(/[^a-zA-Z0-9]/g, '-')}`;
+      const safeId = `skill-${skillName.replace(/[^a-zA-Z0-9]/g, "-")}`;
       const el = document.getElementById(safeId);
       if (el) {
         const y = el.getBoundingClientRect().top + window.scrollY - 120;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        window.scrollTo({ top: y, behavior: "smooth" });
       }
     }, 400);
 
@@ -85,18 +99,24 @@ export default function SkillsPage() {
   };
 
   const renderSearchBar = (id: string, isCompact: boolean = false) => (
-    <div className={`relative z-30 ${isCompact ? "w-full" : "w-full max-w-md mt-8"}`}>
+    <div
+      className={`relative z-30 ${isCompact ? "w-full" : "w-full max-w-md mt-8"}`}
+    >
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground w-4 h-4" />
         <input
           type="text"
-          placeholder={language === 'pl' ? "Szukaj (np. React, SQL)..." : "Search (e.g. React, SQL)..."}
+          placeholder={
+            language === "pl"
+              ? "Szukaj (np. React, SQL)..."
+              : "Search (e.g. React, SQL)..."
+          }
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className={`w-full bg-card border border-border focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all pl-9 pr-4 py-2.5 text-sm rounded-xl`}
         />
       </div>
-      
+
       {/* Wyniki wyszukiwania */}
       <AnimatePresence>
         {searchQuery.length > 0 && (
@@ -106,19 +126,31 @@ export default function SkillsPage() {
             exit={{ opacity: 0, y: 10 }}
             className={`absolute z-50 w-full mt-2 bg-card border border-border shadow-xl overflow-hidden max-h-60 overflow-y-auto rounded-xl`}
           >
-            {allSkills.filter(s => s.name.toLowerCase().includes(searchQuery.toLowerCase())).map((skill, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleSearchSelect(skill.name, skill.categoryId)}
-                className="w-full text-left hover:bg-secondary/50 border-b border-border/50 last:border-0 transition-colors flex flex-col px-4 py-3"
-              >
-                <span className="font-bold text-sm text-foreground">{skill.name}</span>
-                <span className="text-xs text-muted-foreground">{skill.categoryName}</span>
-              </button>
-            ))}
-            {allSkills.filter(s => s.name.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
+            {allSkills
+              .filter((s) =>
+                s.name.toLowerCase().includes(searchQuery.toLowerCase()),
+              )
+              .map((skill, idx) => (
+                <button
+                  key={idx}
+                  onClick={() =>
+                    handleSearchSelect(skill.name, skill.categoryId)
+                  }
+                  className="w-full text-left hover:bg-secondary/50 border-b border-border/50 last:border-0 transition-colors flex flex-col px-4 py-3"
+                >
+                  <span className="font-bold text-sm text-foreground">
+                    {skill.name}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {skill.categoryName}
+                  </span>
+                </button>
+              ))}
+            {allSkills.filter((s) =>
+              s.name.toLowerCase().includes(searchQuery.toLowerCase()),
+            ).length === 0 && (
               <div className="text-sm text-muted-foreground px-4 py-3">
-                {language === 'pl' ? "Brak wyników." : "No results found."}
+                {language === "pl" ? "Brak wyników." : "No results found."}
               </div>
             )}
           </motion.div>
@@ -130,195 +162,227 @@ export default function SkillsPage() {
   return (
     <div className="min-h-screen bg-background pt-24 pb-16 px-8">
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col xl:flex-row gap-8 relative">
-        
         {/* Lewa kolumna: Główna treść */}
         <div className="flex-1 w-full max-w-5xl mx-auto">
-        {/* Nagłówek i Wyszukiwarka */}
-        <div>
-          <AnimatePresence initial={false} mode="wait">
-            {!activeSection && (
-              <motion.div 
-                key="main-header"
-                initial={{ opacity: 0, height: 0, overflow: "hidden" }}
-                animate={{ opacity: 1, height: "auto", overflow: "visible" }}
-                exit={{ opacity: 0, height: 0, overflow: "hidden" }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              >
-                <div className="pb-16 pt-2">
-                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-                    {t("skills.title")}
-                  </h1>
-                  <p className="text-xl text-muted-foreground max-w-4xl leading-relaxed">
-                    {language === 'pl' 
-                      ? "Moje podejście do inżynierii oprogramowania opiera się na trzech filarach: czystej architekturze, niezawodności kodu oraz realnej wartości dla biznesu. Jako Fullstack Developer sprawnie poruszam się między zaawansowaną logiką serwerową a intuicyjnymi interfejsami użytkownika, wspierając cały proces nowoczesnymi praktykami DevOps i automatyzacją AI. Poniżej znajdziesz szczegółowy opis technologii i metodologii, które stanowią fundament moich codziennych projektów."
-                      : "My approach to software engineering is built on three pillars: clean architecture, code reliability, and delivering real business value. As a Fullstack Developer, I smoothly navigate between advanced server-side logic and intuitive user interfaces, supporting the entire process with modern DevOps practices and AI automation. Below you'll find a detailed breakdown of the technologies and methodologies that form the foundation of my daily projects."}
-                  </p>
-
-                  {/* Ikonki/Pigułki głównych technologii */}
-                  <div className="flex flex-wrap gap-3 mt-8">
-                    {topTechStack.map(tech => (
-                      <span key={tech.name} className="flex items-center gap-2 px-4 py-2 bg-secondary/30 text-foreground font-bold rounded-xl text-sm border border-border/50 shadow-sm hover:bg-secondary/50 transition-colors cursor-default">
-                        <tech.icon className={`w-5 h-5 ${tech.color}`} />
-                        {tech.name}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Wyszukiwarka na start */}
-                  <div className="mt-8">
-                    {renderSearchBar("start-search", false)}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-            
-            {activeSection && (
-              <motion.div 
-                key="compact-header"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4"
-              >
-                <button 
-                  onClick={() => setActiveSection("")}
-                  className="flex items-center text-sm font-semibold text-muted-foreground hover:text-primary transition-colors group w-fit"
+          {/* Nagłówek i Wyszukiwarka */}
+          <div>
+            <AnimatePresence initial={false} mode="wait">
+              {!activeSection && (
+                <motion.div
+                  key="main-header"
+                  initial={{ opacity: 0, height: 0, overflow: "hidden" }}
+                  animate={{ opacity: 1, height: "auto", overflow: "visible" }}
+                  exit={{ opacity: 0, height: 0, overflow: "hidden" }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                  <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                  {language === 'pl' ? "Wróć do przeglądu" : "Back to overview"}
-                </button>
-                <div className="w-full md:w-64">
-                  {renderSearchBar("compact", true)}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+                  <div className="pb-16 pt-2">
+                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+                      {t("skills.title")}
+                    </h1>
+                    <p className="text-xl text-muted-foreground max-w-4xl leading-relaxed">
+                      {language === "pl"
+                        ? "Wychodzę z założenia, że narzędzia dobiera się do problemu, a nie problem do narzędzi. Moje podejście do inżynierii oprogramowania opiera się na pisaniu czystego, czytelnego kodu, pokrywaniu go odpowiednimi testami oraz ciągłym poszukiwaniu optymalizacji. W codziennej pracy aktywnie wspieram się narzędziami AI, traktując je jako turbodoładowanie dla produktywności i automatyzacji powtarzalnych procesów."
+                        : "I believe that tools should be matched to the problem, not the problem to the tools. My approach to software engineering is based on writing clean, readable code, covering it with appropriate tests, and constantly seeking optimization. In my daily work, I actively support myself with AI tools, treating them as a turbocharger for productivity and the automation of repetitive processes."}
+                    </p>
 
-        {/* Spis treści (Mobile/Tablet Only) */}
-        <TableOfContents 
-          sections={portfolioData.detailedSkills.map(c => ({
-            id: c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-            title: c.category
-          }))}
-          activeSection={activeSection}
-          setActiveSection={setActiveSection}
-          language={language as "pl" | "en"}
-          isMobile={true}
-          showOverview={true}
-          overviewText={{ pl: "Wszystkie", en: "All" }}
-        />
-
-        {/* Aktywna kategoria */}
-        <div className={activeSection ? "space-y-16 min-h-[50vh]" : "space-y-16"}>
-          <AnimatePresence mode="wait">
-            {portfolioData.detailedSkills.filter(c => !activeSection || c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-') === activeSection).map((category) => {
-              const IconComponent = iconMap[category.iconName] || Server;
-              
-              return (
-                <motion.div 
-                  key={category.category.en}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {/* Nagłówek Kategorii */}
-                  <div className="mb-8 border-b border-border/50 pb-6">
-                    <div className="flex items-center space-x-4 mb-4">
-                      <div className="p-3 bg-primary/10 rounded-xl text-primary">
-                        <IconComponent className="w-8 h-8" />
-                      </div>
-                      <h2 className="text-3xl md:text-4xl font-bold">
-                        {category.category[language as 'pl' | 'en']}
-                      </h2>
+                    {/* Ikonki/Pigułki głównych technologii */}
+                    <div className="flex flex-wrap gap-3 mt-8">
+                      {topTechStack.map((tech) => (
+                        <span
+                          key={tech.name}
+                          className="flex items-center gap-2 px-4 py-2 bg-secondary/30 text-foreground font-bold rounded-xl text-sm border border-border/50 shadow-sm hover:bg-secondary/50 transition-colors cursor-default"
+                        >
+                          <tech.icon className={`w-5 h-5 ${tech.color}`} />
+                          {tech.name}
+                        </span>
+                      ))}
                     </div>
-                    {category.description && (
-                      <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl">
-                        {category.description[language as 'pl' | 'en']}
-                      </p>
-                    )}
+
+                    {/* Wyszukiwarka na start */}
+                    <div className="mt-8">
+                      {renderSearchBar("start-search", false)}
+                    </div>
                   </div>
-
-                  {/* Siatka Umiejętności */}
-                  {(() => {
-                    const hasSubcategories = category.items.some(item => item.subcategory);
-                    
-                    const renderItem = (skill: typeof category.items[0], idx: number) => {
-                      const isHighlighted = highlightedSkill === skill.name;
-                      const safeId = `skill-${skill.name.replace(/[^a-zA-Z0-9]/g, '-')}`;
-
-                      return (
-                      <motion.div
-                        id={safeId}
-                        key={skill.name}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: idx * 0.05 }}
-                        className={`group relative p-6 bg-card rounded-2xl border transition-all duration-300 flex flex-col h-full ${
-                          isHighlighted 
-                            ? "border-primary ring-2 ring-primary/50 shadow-lg scale-[1.02] bg-primary/5" 
-                            : "border-border/50 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1"
-                        }`}
-                      >
-                        <div className={`font-bold text-lg mb-2 transition-colors ${isHighlighted ? "text-primary" : "group-hover:text-primary"}`}>
-                          {skill.name}
-                        </div>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {skill.description[language as 'pl' | 'en']}
-                        </p>
-                      </motion.div>
-                    )};
-
-                    if (hasSubcategories) {
-                      const grouped = category.items.reduce((acc, item) => {
-                        const sub = item.subcategory ? item.subcategory[language as 'pl' | 'en'] : 'Pozostałe';
-                        if (!acc[sub]) acc[sub] = [];
-                        acc[sub].push(item);
-                        return acc;
-                      }, {} as Record<string, typeof category.items>);
-
-                      return (
-                        <div className="flex flex-col gap-10">
-                          {Object.entries(grouped).map(([subName, items]) => (
-                            <div key={subName}>
-                              <h3 className="text-xl font-bold mb-6 text-foreground/80 border-l-4 border-primary pl-3">
-                                {subName}
-                              </h3>
-                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {items.map((skill, idx) => renderItem(skill, idx))}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    }
-
-                    return (
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {category.items.map((skill, idx) => renderItem(skill, idx))}
-                      </div>
-                    );
-                  })()}
                 </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </div>
+              )}
+
+              {activeSection && (
+                <motion.div
+                  key="compact-header"
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4"
+                >
+                  <button
+                    onClick={() => setActiveSection("")}
+                    className="flex items-center text-sm font-semibold text-muted-foreground hover:text-primary transition-colors group w-fit"
+                  >
+                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+                    {language === "pl"
+                      ? "Wróć do przeglądu"
+                      : "Back to overview"}
+                  </button>
+                  <div className="w-full md:w-64">
+                    {renderSearchBar("compact", true)}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Spis treści (Mobile/Tablet Only) */}
+          <TableOfContents
+            sections={portfolioData.detailedSkills.map((c) => ({
+              id: c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+              title: c.category,
+            }))}
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            language={language as "pl" | "en"}
+            isMobile={true}
+            showOverview={true}
+            overviewText={{ pl: "Wszystkie", en: "All" }}
+          />
+
+          {/* Aktywna kategoria */}
+          <div
+            className={activeSection ? "space-y-16 min-h-[50vh]" : "space-y-16"}
+          >
+            <AnimatePresence mode="wait">
+              {portfolioData.detailedSkills
+                .filter(
+                  (c) =>
+                    !activeSection ||
+                    c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, "-") ===
+                      activeSection,
+                )
+                .map((category) => {
+                  const IconComponent = iconMap[category.iconName] || Server;
+
+                  return (
+                    <motion.div
+                      key={category.category.en}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Nagłówek Kategorii */}
+                      <div className="mb-8 border-b border-border/50 pb-6">
+                        <div className="flex items-center space-x-4 mb-4">
+                          <div className="p-3 bg-primary/10 rounded-xl text-primary">
+                            <IconComponent className="w-8 h-8" />
+                          </div>
+                          <h2 className="text-3xl md:text-4xl font-bold">
+                            {category.category[language as "pl" | "en"]}
+                          </h2>
+                        </div>
+                        {category.description && (
+                          <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl">
+                            {category.description[language as "pl" | "en"]}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Siatka Umiejętności */}
+                      {(() => {
+                        const hasSubcategories = category.items.some(
+                          (item) => item.subcategory,
+                        );
+
+                        const renderItem = (
+                          skill: (typeof category.items)[0],
+                          idx: number,
+                        ) => {
+                          const isHighlighted = highlightedSkill === skill.name;
+                          const safeId = `skill-${skill.name.replace(/[^a-zA-Z0-9]/g, "-")}`;
+
+                          return (
+                            <motion.div
+                              id={safeId}
+                              key={skill.name}
+                              initial={{ opacity: 0, y: 10 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              viewport={{ once: true }}
+                              transition={{ delay: idx * 0.05 }}
+                              className={`group relative p-6 bg-card rounded-2xl border transition-all duration-300 flex flex-col h-full ${
+                                isHighlighted
+                                  ? "border-primary ring-2 ring-primary/50 shadow-lg scale-[1.02] bg-primary/5"
+                                  : "border-border/50 hover:border-primary/50 hover:shadow-lg hover:-translate-y-1"
+                              }`}
+                            >
+                              <div
+                                className={`font-bold text-lg mb-2 transition-colors ${isHighlighted ? "text-primary" : "group-hover:text-primary"}`}
+                              >
+                                {skill.name}
+                              </div>
+                              <p className="text-sm text-muted-foreground leading-relaxed">
+                                {skill.description[language as "pl" | "en"]}
+                              </p>
+                            </motion.div>
+                          );
+                        };
+
+                        if (hasSubcategories) {
+                          const grouped = category.items.reduce(
+                            (acc, item) => {
+                              const sub = item.subcategory
+                                ? item.subcategory[language as "pl" | "en"]
+                                : "Pozostałe";
+                              if (!acc[sub]) acc[sub] = [];
+                              acc[sub].push(item);
+                              return acc;
+                            },
+                            {} as Record<string, typeof category.items>,
+                          );
+
+                          return (
+                            <div className="flex flex-col gap-10">
+                              {Object.entries(grouped).map(
+                                ([subName, items]) => (
+                                  <div key={subName}>
+                                    <h3 className="text-xl font-bold mb-6 text-foreground/80 border-l-4 border-primary pl-3">
+                                      {subName}
+                                    </h3>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                      {items.map((skill, idx) =>
+                                        renderItem(skill, idx),
+                                      )}
+                                    </div>
+                                  </div>
+                                ),
+                              )}
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {category.items.map((skill, idx) =>
+                              renderItem(skill, idx),
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </motion.div>
+                  );
+                })}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Prawa kolumna: Spis treści (Sidebar) - Desktop Only */}
-        <TableOfContents 
-          sections={portfolioData.detailedSkills.map(c => ({
-            id: c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-            title: c.category
+        <TableOfContents
+          sections={portfolioData.detailedSkills.map((c) => ({
+            id: c.category.en.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+            title: c.category,
           }))}
           activeSection={activeSection}
           setActiveSection={setActiveSection}
           language={language as "pl" | "en"}
           isMobile={false}
+          desktopClassName="xl:translate-x-16"
         />
-
       </div>
 
       {/* Scroll to Top Button */}

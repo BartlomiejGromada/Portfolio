@@ -71,6 +71,7 @@ model Profile {
   sourceCodeUrl      String
   cvUrl              LocalizedString
   skillsSummary      String[]
+  email              String          @default("bartlomiejgromada97@gmail.com")
 }
 
 model Project {

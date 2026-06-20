@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Zap, Menu, X } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./icons";
@@ -11,6 +12,7 @@ import { ThemeToggle } from "./ThemeToggle";
 export function Navbar() {
   const { t, language, setLanguage } = useLanguage();
   const portfolioData = usePortfolio();
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -32,15 +34,22 @@ export function Navbar() {
 
       {/* Navigation Links (Desktop) */}
       <div className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="text-foreground/80 hover:text-primary transition-colors pb-1 uppercase"
-          >
-            {link.label}
-          </Link>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = pathname === link.href;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`transition-colors pb-1 uppercase ${
+                isActive
+                  ? "text-primary font-bold border-b-2 border-primary"
+                  : "text-foreground/80 hover:text-primary font-medium"
+              }`}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
       </div>
 
       {/* Actions */}
@@ -88,16 +97,23 @@ export function Navbar() {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 w-full bg-background/95 backdrop-blur-md border-b border-border/50 py-4 px-8 flex flex-col space-y-4 shadow-lg">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="text-lg font-medium text-foreground/80 hover:text-primary transition-colors uppercase py-2"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`text-lg uppercase py-2 transition-colors ${
+                  isActive
+                    ? "text-primary font-bold"
+                    : "text-foreground/80 font-medium hover:text-primary"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
           <div className="flex items-center gap-4 pt-4 border-t border-border/50">
             <Link
               href={portfolioData.socialLinks.github}
